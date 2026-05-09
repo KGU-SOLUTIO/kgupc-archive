@@ -1,0 +1,176 @@
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[none]{hyphenat}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX, LetterSpace=-2}
+
+\definecolor{solutio-purple}{RGB}{127,99,173}
+\definecolor{solutio-gray}{RGB}{44,49,68}
+
+
+\definecolor{boj}{RGB}{0,118,191}
+\definecolor{acgreen}{RGB}{0,159,107}
+\definecolor{wared}{RGB}{231,76,60}
+
+% Bronze
+\definecolor{acB5}{HTML}{9d4900}
+\definecolor{acB4}{HTML}{a54f00}
+\definecolor{acB3}{HTML}{ad5600}
+\definecolor{acB2}{HTML}{b55d0a}
+\definecolor{acB1}{HTML}{c67739}
+
+% Silver
+\definecolor{acS5}{HTML}{38546e}
+\definecolor{acS4}{HTML}{3d5a74}
+\definecolor{acS3}{HTML}{435f7a}
+\definecolor{acS2}{HTML}{496580}
+\definecolor{acS1}{HTML}{4e6a86}
+
+% Gold
+\definecolor{acG5}{HTML}{d28500}
+\definecolor{acG4}{HTML}{df8f00}
+\definecolor{acG3}{HTML}{ec9a00}
+\definecolor{acG2}{HTML}{f9a518}
+\definecolor{acG1}{HTML}{ffb028}
+
+% Platinum
+\definecolor{acP5}{HTML}{00c78b}
+\definecolor{acP4}{HTML}{00d497}
+\definecolor{acP3}{HTML}{27e2a4}
+\definecolor{acP2}{HTML}{3ef0b1}
+\definecolor{acP1}{HTML}{51fdbd}
+
+% Diamond
+\definecolor{acD5}{HTML}{009ee5}
+\definecolor{acD4}{HTML}{00a9f0}
+\definecolor{acD3}{HTML}{00b4fc}
+\definecolor{acD2}{HTML}{2bbfff}
+\definecolor{acD1}{HTML}{41caff}
+
+% Ruby
+\definecolor{acR5}{HTML}{e0004c}
+\definecolor{acR4}{HTML}{ea0053}
+\definecolor{acR3}{HTML}{f5005a}
+\definecolor{acR2}{HTML}{ff0062}
+\definecolor{acR1}{HTML}{ff3071}
+
+\setmainfont{TimesLTStd}[
+    Path = ../common/fonts/,
+    Extension = .otf,
+    UprightFont = *-Roman,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic
+    ]
+
+\setsansfont{Inter}[
+    Path = ../common/fonts/,
+    Extension = .otf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic
+    ]
+
+\setmonofont{DMMono}[
+    Path = ../common/fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Medium,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-MediumItalic
+    ]
+\newfontfamily\consolas{Consolas}
+
+\setmainhangulfont[interhchar=-0.06em]{NotoSerifCJKkr}[
+    Path = ../common/fonts/,
+    Extension = .otf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold
+    ]
+
+\setsanshangulfont[interhchar=-0.06em]{NotoSansCJKkr}[
+    Path = ../common/fonts/,
+    Extension = .otf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold
+    ]
+
+\setbeamercolor{itemize item}{fg=solutio-purple}
+\setbeamercolor{enumerate item}{fg=solutio-purple}
+\setbeamercolor{alerted text}{fg=solutio-purple}
+\setbeamercolor{section in toc}{fg=black}
+
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+\setbeamertemplate{itemize item}{✓}
+\setbeamertemplate{itemize subitem}{--}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{title page}{}
+\setbeamertemplate{frametitle}{}
+\setbeamertemplate{caption}{\tiny\insertcaption}
+\setbeamertemplate{caption label separator}{}
+
+\newcommand{\sponsorimage}{}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+\newcommand{\sectiontitle}[2]{
+    {\huge \addfontfeatures{LetterSpace=-5} \color{solutio-purple} \textbf{#1}. #2}\\
+    \vspace{3mm}
+}
+
+\newcommand{\sectionmeta}[1]{
+    \footnotesize{\color{solutio-gray}#1}\\
+    \vspace{6mm}
+}
+
+\newdimen\slidewidth % auxiliary dimension
+\newdimen\slideheight % auxiliary dimension
+
+\slidewidth=\the\paperwidth
+\slideheight=\the\paperheight
+
+\spaceskip=.175em
+
+\setbeamertemplate{background}{
+	\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fill[color=white] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+
+		\ifnum\thepage=1\relax
+			\fill[color=solutio-purple] (0, 4cm) rectangle(\slidewidth,\slideheight);
+			
+			\node[anchor=south,text width=\slidewidth-2cm,inner xsep=0.5cm,execute at begin node=\setlength{\baselineskip}{18pt}] at (0.5\slidewidth,4.2cm) {\color{white}\Huge\textbf{\inserttitle}};
+			\node[anchor=north east,align=right] at (\slidewidth-1.0cm,3.8cm) {\color{black}\tiny\insertsubtitle};
+			\node[above] at(0.5\slidewidth,3.2cm) {\color{black}\tiny by};
+			\node at (0.5\slidewidth,3cm) {\color{black}\insertauthor};
+
+            \node at (0.5\slidewidth,1.2cm) { \includegraphics[width=0.5\paperwidth]{\sponsorimage}};
+
+			\node[anchor=south west] at(0.9cm,0.4cm) {\color{solutio-gray}\tiny\vphantom{lp}{\inserttitle}};
+			\node[anchor=south east] at(\slidewidth-1.0cm,0.4cm) {\color{solutio-gray}\tiny\insertdate};
+		\else
+			\node[anchor=north,text width=\slidewidth-2.0cm,inner xsep=0.5cm,inner ysep=0.25cm] at (0.5\slidewidth,\slideheight-0.4cm) {\color{solutio-purple}\footnotesize{\insertframetitle}};
+			
+			\node[anchor=north east,inner sep=0pt] (russell) at (\slidewidth-0.9cm, \slideheight-0.5cm) {\includegraphics[height=0.6cm]{../common/images/solutio-logo.png}};
+			\node[anchor=south west] at(0.9cm,0.4cm) {\color{solutio-gray}\tiny\vphantom{lp}{\inserttitle}};
+			\node[anchor=south east] at(\slidewidth-0.9cm,0.4cm) {\color{solutio-gray}\tiny\insertframenumber};
+		\fi
+	\end{tikzpicture}
+}
+
+\setlength{\leftmargini}{0pt}
+\setlength{\leftmarginii}{13pt}
+
+\makeatother
