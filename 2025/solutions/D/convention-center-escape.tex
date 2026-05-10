@@ -1,0 +1,27 @@
+\section{D. 컨벤션 대탈출}
+
+\begin{frame} % No title at first slide
+    \sectiontitle{D}{컨벤션 대탈출}
+    \sectionmeta{
+        출제자 -- 전민주(\consolas{\href{https://solved.ac/profile/mingmingmon}{@mingmingmon}})\\
+        태그: \consolas {\#bfs, \#grid\_graph}\\
+        예상 난이도 -- \textbf{\color{acS2}Silver2}
+    }
+    \begin{itemize}
+        \item 제출 39번, 정답 13명 (정답률 33.3\%)
+        \item 처음 푼 사람: 김0건 29분
+    \end{itemize}
+\end{frame}
+%----------------------------------------------------------------------------
+\begin{frame}{\textbf{D}. 컨벤션 대탈출}
+    \begin{itemize}
+        \item 주어진 컨벤션 센터의 좌석 정보에 따르면 'O'는 이동 가능한 영역, 'X'는 이동 불가능한 영역입니다.
+        \item 문제에서 원하는 것은 가장 왼쪽 아래에서부터 가장 오른쪽 위까지 이동하는 최단 거리입니다.
+        \item 다양한 최단경로 알고리즘(BFS, 플로이드 워샬, 데이크스트라 등) 중 적합한 것은
+        한 좌석에서 다른 좌석으로 이동하는 데 항상 1호 이동한 것이라고 보기 때문에 BFS입니다.\\
+        \item 자료 구조 Queue를 사용하여 BFS를 구현하면 해결할 수 있습니다.
+        \item 이동 가능한 방향이 상,하,좌,우 4방향이므로, 격자맵을 넘어가거나,
+        이미 탐색한 좌석을 재방문하지 않도록 조심해야 합니다.
+
+    \end{itemize}
+\end{frame}

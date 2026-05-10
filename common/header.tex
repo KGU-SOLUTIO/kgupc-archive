@@ -16,6 +16,9 @@
 \usepackage{epigraph}
 \usepackage[many]{tcolorbox}
 
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+
 \setbeamercolor{title}{fg=black}
 \setbeamercolor{frametitle}{fg=solutio-purple}
 \setbeamercolor{structure}{fg=solutio-purple}
@@ -24,6 +27,11 @@
 \everymath{\displaystyle}
 
 \lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=solutio-purple
+}
 
 \newcommand{\translation}[1]{\textsuperscript{#1}}
 

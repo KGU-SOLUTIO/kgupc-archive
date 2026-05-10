@@ -1,0 +1,29 @@
+\section{G. 학교 가기 싫어!}
+
+\begin{frame} % No title at first slide
+    \sectiontitle{G}{학교 가기 싫어!}
+    \sectionmeta{
+        출제자 -- 노태윤(\consolas{\href{https://solved.ac/profile/areian13}{@areian13}})\\
+        태그: \consolas {\#convex\_hull, \#polygon\_area, \#rotating\_calipers}\\
+        예상 난이도 -- \textbf{\color{acP2}Platinum2}
+    }
+    \begin{itemize}
+        \item 제출 4번, 정답 0명 (정답률 0\%)
+        \item 처음 푼 사람: -
+    \end{itemize}
+\end{frame}
+%----------------------------------------------------------------------------
+\begin{frame}{\textbf{G}. 학교 가기 싫어!}
+    \begin{itemize}
+        \item 문제 이해 자체는 쉬웠지만, 대개 구현이 막혔으리라 생각됩니다.\\
+        다만, 태그에 표기된 알고리즘을 아는 사람 입장에선 응용이 전혀 없는 웰노운입니다.
+        \item 이 자리에서 볼록 껍질, 다각형의 넓이, 회전하는 캘리퍼스를 설명하는 것은 부적절하므로,
+        궁금하신 분께선 저 키워드로 직접 공부해보시는 것을 추천드립니다.
+        \item 각 알고리즘이 어떻게 사용되는지 정도 설명하자면,\\
+        \begin{enumerate}
+            \item 볼록 껍질을 통해 $O(n \log n)$으로 모든 점을 포함하는 가장 작은 볼록 다각형을 구합니다.
+            \item 신발끈 공식으로 유명한 방식을 통해 다각형의 넓이를 $O(n)$으로 구합니다.
+            \item 회전하는 캘리퍼스를 이용해 가장 먼 두 점을 $O(n)$으로 구할 수 있습니다.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
