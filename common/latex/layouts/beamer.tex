@@ -1,93 +1,10 @@
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage[none]{hyphenat}
-\usepackage{fontspec}
-\defaultfontfeatures{Ligatures=TeX, LetterSpace=-2}
+\documentclass[11pt, aspectratio=169]{beamer}
+\usefonttheme{professionalfonts}
 
-\definecolor{solutio-purple}{RGB}{127,99,173}
-\definecolor{solutio-gray}{RGB}{44,49,68}
-
-
-\definecolor{boj}{RGB}{0,118,191}
-\definecolor{acgreen}{RGB}{0,159,107}
-\definecolor{wared}{RGB}{231,76,60}
-
-% Bronze
-\definecolor{acB5}{HTML}{9d4900}
-\definecolor{acB4}{HTML}{a54f00}
-\definecolor{acB3}{HTML}{ad5600}
-\definecolor{acB2}{HTML}{b55d0a}
-\definecolor{acB1}{HTML}{c67739}
-
-% Silver
-\definecolor{acS5}{HTML}{38546e}
-\definecolor{acS4}{HTML}{3d5a74}
-\definecolor{acS3}{HTML}{435f7a}
-\definecolor{acS2}{HTML}{496580}
-\definecolor{acS1}{HTML}{4e6a86}
-
-% Gold
-\definecolor{acG5}{HTML}{d28500}
-\definecolor{acG4}{HTML}{df8f00}
-\definecolor{acG3}{HTML}{ec9a00}
-\definecolor{acG2}{HTML}{f9a518}
-\definecolor{acG1}{HTML}{ffb028}
-
-% Platinum
-\definecolor{acP5}{HTML}{00c78b}
-\definecolor{acP4}{HTML}{00d497}
-\definecolor{acP3}{HTML}{27e2a4}
-\definecolor{acP2}{HTML}{3ef0b1}
-\definecolor{acP1}{HTML}{51fdbd}
-
-% Diamond
-\definecolor{acD5}{HTML}{009ee5}
-\definecolor{acD4}{HTML}{00a9f0}
-\definecolor{acD3}{HTML}{00b4fc}
-\definecolor{acD2}{HTML}{2bbfff}
-\definecolor{acD1}{HTML}{41caff}
-
-% Ruby
-\definecolor{acR5}{HTML}{e0004c}
-\definecolor{acR4}{HTML}{ea0053}
-\definecolor{acR3}{HTML}{f5005a}
-\definecolor{acR2}{HTML}{ff0062}
-\definecolor{acR1}{HTML}{ff3071}
-
-\setmainfont{TimesLTStd}[
-    Path = ../../common/fonts/,
-    Extension = .otf,
-    UprightFont = *-Roman,
-    BoldFont = *-Bold,
-    ItalicFont = *-Italic,
-    BoldItalicFont = *-BoldItalic
-    ]
-
-\setsansfont{Inter}[
-    Path = ../../common/fonts/,
-    Extension = .otf,
-    UprightFont = *-Regular,
-    BoldFont = *-Bold,
-    ItalicFont = *-Italic,
-	BoldItalicFont = *-BoldItalic
-    ]
-
-\setmonofont{Cambria}
-\newfontfamily\consolas{Consolas}
-
-\setmainhangulfont[interhchar=-0.06em]{NotoSerifCJKkr}[
-    Path = ../../common/fonts/,
-    Extension = .otf,
-    UprightFont = *-Regular,
-    BoldFont = *-Bold
-    ]
-
-\setsanshangulfont[interhchar=-0.06em]{D2Coding}[
-    Path = ../../common/fonts/,
-    Extension = .ttf,
-    UprightFont = *-Regular,
-    BoldFont = *-Bold
-    ]
+\input{../../common/latex/core/packages.tex}
+\input{../../common/latex/core/fonts.tex}
+\input{../../common/latex/core/colors.tex}
+\input{../../common/latex/core/macros.tex}
 
 \setbeamercolor{itemize item}{fg=solutio-purple}
 \setbeamercolor{enumerate item}{fg=solutio-purple}
@@ -99,6 +16,9 @@
 \setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
 
 \setbeamertemplate{itemize item}{✓}
+\setbeamertemplate{enumerate item}{
+    {\color{solutio-purple}\insertenumlabel.}
+}
 \setbeamertemplate{itemize subitem}{--}
 
 \setbeamertemplate{navigation symbols}{}
@@ -106,6 +26,13 @@
 \setbeamertemplate{frametitle}{}
 \setbeamertemplate{caption}{\tiny\insertcaption}
 \setbeamertemplate{caption label separator}{}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=solutio-purple,
+    linkcolor=solutio-purple,
+    citecolor=solutio-purple
+}
 
 \newcommand{\sponsorimage}{}
 
@@ -135,6 +62,7 @@
 \slideheight=\the\paperheight
 
 \spaceskip=.175em
+\linespread{1.15}
 
 \setbeamertemplate{background}{
 	\begin{tikzpicture}
@@ -156,7 +84,7 @@
 		\else
 			\node[anchor=north,text width=\slidewidth-2.0cm,inner xsep=0.5cm,inner ysep=0.25cm] at (0.5\slidewidth,\slideheight-0.4cm) {\color{solutio-purple}\footnotesize{\insertframetitle}};
 			
-			\node[anchor=north east,inner sep=0pt] (russell) at (\slidewidth-0.9cm, \slideheight-0.5cm) {\includegraphics[height=0.6cm]{../../common/images/solutio-logo.png}};
+			\node[anchor=north east,inner sep=0pt] (russell) at (\slidewidth-0.9cm, \slideheight-0.5cm) {\includegraphics[height=0.6cm]{../../common/images/logo.png}};
 			\node[anchor=south west] at(0.9cm,0.4cm) {\color{solutio-gray}\tiny\vphantom{lp}{\inserttitle}};
 			\node[anchor=south east] at(\slidewidth-0.9cm,0.4cm) {\color{solutio-gray}\tiny\insertframenumber};
 		\fi

@@ -1,11 +1,15 @@
-\section{F. 이기적인 별자리}
+\setproblem
+    {F}
+    {이기적인 별자리}
+
+\section{\pid. \pname}
 
 \begin{frame} % No title at first slide
-    \sectiontitle{F}{이기적인 별자리}
+    \sectiontitle{\pid}{\pname}
     \sectionmeta{
-        출제자 -- 노태윤({\href{https://solved.ac/profile/areian13}{@areian13}})\\
-        태그: \consolas {\#set, \#mst, \#greedy}\\
-        예상 난이도 -- \textbf{\color{acG2}Gold2}
+        출제자: 노태윤(\idtext{areian13})\\
+        태그: \tagtext{\#set, \#mst, \#greedy}\\
+        예상 난이도: \tiertext{Gold2}
     }
     \begin{itemize}
         \item 제출 10번, 정답 0명 (정답률 0\%)
@@ -13,7 +17,7 @@
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{F}. 이기적인 별자리}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 일단 좌표가 중복되는 점에 대한 처리부터 해봅시다.
         \item 가장 간단한 방법은 모든 점을 표현할 수 있는 2차원 배열을 만드는 겁니다.\\
@@ -27,7 +31,7 @@
 \end{frame}
 
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{F}. 이기적인 별자리}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item $\texttt{map<pair<int, int>, int> pos}$를 쓰는 방법도 있습니다.\\
         $\texttt{pos[\{x, y\}] = max(pos[\{x, y\}], b)}$ 이런 식으로 쓰겠군요.
@@ -41,7 +45,7 @@
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{F}. 이기적인 별자리}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 이제 별을 이어봅시다.\\
         만약 중심별이란 개념이 없었다면, 이 문제는 매우 웰노운한 MST였습니다.\\
@@ -55,7 +59,7 @@
 \end{frame}
 
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{F}. 이기적인 별자리}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 첫번째 방법입니다.\\
         일단 MST 과정에서 $u, v$ 모두 비중심별이라면, 고민할 것 없이 $\texttt{union}$해줍니다.
@@ -68,7 +72,7 @@
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{F}. 이기적인 별자리}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 첫번째 방법은 직관적이나, 루트 노드가 무엇인지, 비/중심별을 판별하는 등의 구현상의 귀찮음이 많습니다.
         두번째 방식은 매우 그리디합니다.
@@ -80,7 +84,7 @@
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{F}. 이기적인 별자리}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 아이디어가 중요한 문제였고, 시간 복잡도 자체는 일반적인 MST와 다를 바 없기 때문에\\
 

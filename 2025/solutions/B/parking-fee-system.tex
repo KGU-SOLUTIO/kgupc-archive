@@ -1,11 +1,15 @@
-\section{B. 주차장 정산 시스템}
+\setproblem
+    {B}
+    {주차장 정산 시스템}
+
+\section{\pid. \pname}
 
 \begin{frame} % No title at first slide
-    \sectiontitle{B}{주차장 정산 시스템}
+    \sectiontitle{\pid}{\pname}
     \sectionmeta{
-        출제자 -- 박준형({\href{https://solved.ac/profile/refill447}{@refill447}})\\
-        태그: \consolas {\#set, \#hash\_set, \#tree\_set}\\
-        예상 난이도 -- \textbf{\color{acS5}Silver5}
+        출제자:박준형(\idtext{refill447})\\
+        태그: \tagtext{\#set, \#hash\_set, \#tree\_set}\\
+        예상 난이도: \tiertext{Silver5}
     }
     \begin{itemize}
         \item 제출 33번, 정답 18명 (정답률 54.5\%)
@@ -13,7 +17,7 @@
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{B}. 주차장 정산 시스템}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 핵심은 각 차량의 입차/출차 시간의 차이를 계산하는 것입니다.
         \begin{enumerate}
@@ -26,7 +30,7 @@
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{B}. 주차장 정산 시스템}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{columns}[T]
 
     % 왼쪽
@@ -35,7 +39,7 @@
             \item 구현(파이썬 코드)
         \end{itemize}
 
-        \includegraphics[width=\linewidth]{images/b-solution-code.png}
+        \includegraphics[width=\linewidth]{images/solution-code.png}
     \end{column}
 
     % 오른쪽
@@ -59,10 +63,10 @@
 \end{columns}
 \end{frame}
 %----------------------------------------------------------------------------
-\begin{frame}{\textbf{B}. 주차장 정산 시스템}
+\begin{frame}{\textbf{\pid}. \pname}
     \begin{itemize}
         \item 별해\\
-        $N \le 1,000$이므로,\\
+        $N \le 1\,000$이므로,\\
         IN에 대해 모든 $\texttt{\{car\_number,in\_time\}}$ 쌍을 배열에 담고,\\
         OUT에 대해 브루트포스로 차량 번호를 찾아\\
         $\texttt{in\_time}$과 비교하여 계산할 수 있습니다.\\
