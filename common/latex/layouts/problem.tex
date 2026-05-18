@@ -1,0 +1,92 @@
+
+% ---------- Core ----------
+\input{../../common/latex/core/packages.tex}
+\input{../../common/latex/core/fonts.tex}
+\input{../../common/latex/core/colors.tex}
+\input{../../common/latex/core/macros.tex}
+
+% ---------- Article Packages ----------
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+% ---------- Hyperref ----------
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=black,
+    citecolor=black
+}
+
+% ---------- Layout ----------
+\linespread{1.08}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+
+% ---------- Header/Footer ----------
+\pagestyle{fancy}
+
+\fancyhf{}
+
+\fancyhead[R]{
+    Problem \problemletter
+}
+
+\fancyfoot[C]{
+    \thepage
+}
+
+% ==================================================
+% Problem Metadata
+% ==================================================
+
+\newcommand{\problemletter}{}
+\newcommand{\problemtitle}{}
+\newcommand{\problemtimelimit}{1 Second}
+
+\newcommand{\setprobleminfo}[3]{
+    \renewcommand{\problemletter}{#1}
+    \renewcommand{\problemtitle}{#2}
+    \renewcommand{\problemtimelimit}{#3}
+}
+
+% ==================================================
+% Problem Title
+% ==================================================
+
+\newcommand{\makeproblemtitle}{
+    \begin{center}
+
+        {\Large \textbf{Problem \problemletter}}
+
+        \vspace{0.4em}
+
+        {\huge \textbf{\problemtitle}}
+
+        \vspace{0.7em}
+
+        {\large Time Limit: \problemtimelimit}
+
+        \vspace{1.5em}
+
+    \end{center}
+}
+
+% ==================================================
+% Common Sections
+% ==================================================
+
+\newcommand{\InputSection}{
+    \section*{Input}
+}
+
+\newcommand{\OutputSection}{
+    \section*{Output}
+}
+
+\newcommand{\SampleSection}{
+    \section*{Sample Input and Output}
+}
