@@ -13,6 +13,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PYTHON = ROOT / "2025" / ".venv" / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
 
 
 def pdf_text(path):
@@ -23,8 +24,9 @@ def pdf_text(path):
 
 def run_build(source, log):
     with log.open("wb") as output:
-        result = subprocess.run([sys.executable, str(ROOT / "scripts" / "build.py"),
-                                 str(source)], stdout=output, stderr=subprocess.STDOUT)
+        result = subprocess.run([str(PYTHON), "-m", "kgupc_toolkit", "build", str(source),
+                                 "--lock", str(ROOT / "2025" / "toolkit.lock.json")],
+                                stdout=output, stderr=subprocess.STDOUT)
     if result.returncode:
         raise RuntimeError(f"Build failed; see {log}")
 
@@ -40,8 +42,8 @@ def main():
             raise RuntimeError(f"Missing tool: {command}")
     logs = ROOT / "2025" / "problems" / "build" / "verification"
     logs.mkdir(parents=True, exist_ok=True)
-    # Two directory levels preserve the common template's ../../common paths.
-    with tempfile.TemporaryDirectory(prefix=".pdf-check-", dir=ROOT) as temporary:
+    # Deliberately use a different directory depth from 2025: templates come from the package.
+    with tempfile.TemporaryDirectory(prefix=".pdf-check-", dir=ROOT / "build") as temporary:
         contest = Path(temporary).resolve()
         require(contest.is_relative_to(ROOT), "Temporary contest must stay in the workspace")
         directory = contest / "problems"
@@ -69,7 +71,9 @@ def main():
 
         images = directory / "A" / "images"
         images.mkdir()
-        shutil.copyfile(ROOT / "common" / "images" / "logo.png", images / "logo.png")
+        resources = Path(subprocess.check_output([str(PYTHON), "-m", "kgupc_toolkit", "resources"],
+                                                text=True).strip())
+        shutil.copyfile(resources / "images" / "logo.png", images / "logo.png")
         statement = next((directory / "A").glob("*.tex"))
         with statement.open("a", encoding="utf-8") as source:
             source.write(r"""

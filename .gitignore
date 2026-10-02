@@ -43,6 +43,7 @@
 ## Build tool directories for auxiliary files
 build/
 __pycache__/
+.venv/
 # latexrun
 latex.out/
 

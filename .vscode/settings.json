@@ -7,17 +7,6 @@
                 "%WORKSPACE_FOLDER%/scripts/build.py",
                 "%DOC%"
             ]
-        },
-        {
-            "name": "xelatex",
-            "command": "xelatex",
-            "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-halt-on-error",
-                "-file-line-error",
-                "%DOC%"
-            ]
         }
     ],
 
@@ -26,12 +15,6 @@
             "name": "Archive: editorial / combined + individual problems",
             "tools": [
                 "archive-build"
-            ]
-        },
-        {
-            "name": "xelatex",
-            "tools": [
-                "xelatex"
             ]
         }
     ],

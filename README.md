@@ -1,6 +1,6 @@
 # kgupc-archive
 
-KGUPC 에디토리얼과 문제 지문을 작성하고 PDF로 빌드하는 저장소입니다.
+종료된 KGUPC 대회의 에디토리얼, 문제 지문, 최종 PDF를 보관하는 저장소입니다. 공통 템플릿과 PDF 생성기는 [kgupc-toolkit](https://github.com/SOLUTIO-NEST/kgupc-toolkit)의 버전이 고정된 Python 패키지를 사용합니다.
 
 Based on:
 - [Execushares](https://github.com/hamaluik/Beamer-Theme-Execushares)
@@ -12,7 +12,23 @@ Based on:
 - Python 3.10 이상과 XeLaTeX, `latexmk`가 필요합니다. TeX Live 전체 설치를 권장합니다.
 - `python`, `xelatex`, `latexmk`를 터미널에서 실행할 수 있어야 합니다. MiKTeX에서 `latexmk`를 사용하려면 Perl도 필요합니다.
 - VS Code에서는 LaTeX Workshop 확장을 설치하고 저장소 루트 폴더를 엽니다.
-- Windows의 기존 Cambria/Consolas 서체를 유지하며, 해당 서체가 없는 환경에서는 저장소에 포함된 D2Coding을 사용합니다.
+- Windows의 기존 Cambria/Consolas 서체를 유지하며, 해당 서체가 없는 환경에서는 toolkit에 포함된 D2Coding을 사용합니다.
+
+각 대회는 `toolkit.lock.json`에 toolkit 버전과 템플릿·글꼴·렌더러 내용 해시를 고정하고, 해당 대회의 `.venv`에 일반 설치합니다. 2025의 초기 버전은 `1.0.0`입니다. 개발 중 toolkit 소스를 바꾸어도 이미 설치된 2025의 템플릿은 변경되지 않습니다. 기존 대회의 lock을 최신 템플릿에 맞춰 덮어쓰지 않습니다.
+
+초기 로컬 개발 환경에서는 toolkit을 별도 저장소로 clone하고 아래 설치를 한 번 실행합니다. 소스에서 wheel을 생성할 때 기본 Python 환경에 `setuptools>=68`이 필요합니다. 원본 저장소를 변경하지 않고 임시 복사본에서 빌드하며, lock과 내용이 일치하는 wheel만 설치합니다.
+
+```powershell
+python scripts/setup_toolkit.py 2025 --source ../../SOLUTIO-NEST/kgupc-toolkit
+```
+
+원본 wheel 릴리스가 있으면 소스 checkout 없이도 설치할 수 있습니다.
+
+```powershell
+python scripts/setup_toolkit.py 2025 --wheel C:/downloads/kgupc_toolkit-1.0.0-py3-none-any.whl
+```
+
+현재 초기 구현은 로컬에만 있으며 원격 v1.0.0 태그·wheel 릴리스는 아직 배포하지 않았습니다. 첫 공개 시 해당 커밋과 wheel을 toolkit의 릴리스로 보관해야 합니다. 패키지 소스는 toolkit에 한 벌만 두고, 대회별 설치 환경과 패키지 캐시는 Git에서 제외합니다.
 
 ## PDF 생성
 
@@ -89,22 +105,22 @@ VS Code에서는 `.tex` 파일을 저장하면 기본 `Archive: editorial / comb
 \includeproblem{C}{새문제.tex}
 ```
 
-목록의 순서가 통합본 문제 순서입니다. 한 줄에 한 항목씩 등록하며, 문제 번호는 대문자 영문을 사용합니다. 개별 PDF는 다음 빌드에서 자동 생성됩니다. 대회명과 날짜는 `2025/problems/main.tex`, 공통 서식은 `common/latex/layouts/problem.tex`에서 변경합니다. 새 연도도 `<연도>/problems`, `<연도>/solutions` 구조를 유지하면 같은 빌드 스크립트를 사용할 수 있습니다.
+목록의 순서가 통합본 문제 순서입니다. 한 줄에 한 항목씩 등록하며, 문제 번호는 대문자 영문을 사용합니다. 개별 PDF는 다음 빌드에서 자동 생성됩니다. 대회명과 날짜는 `2025/problems/main.tex`에서 설정합니다. 공통 서식은 toolkit의 `src/kgupc_toolkit/resources/latex/layouts/problem.tex`에서 새 버전으로 변경합니다. 새로 공개하는 종료된 대회도 `<대회>/problems`, `<대회>/solutions` 구조와 해당 대회의 toolkit lock·설치 환경을 준비하면 같은 빌드 명령을 사용할 수 있습니다.
 
 ## 에디토리얼 작성
 
-`2025/solutions/main.tex`에 대회 정보와 해설 목록을 설정하고, 문제별 폴더의 `.tex`에 Beamer 슬라이드를 작성합니다. 이미지는 해당 문제 폴더의 `images/`에서 참조합니다. 공통 테마는 `common/latex/layouts/beamer.tex`입니다. `latexmk`가 필요한 횟수만큼 컴파일하므로 목차, 링크, 참조도 갱신됩니다.
+`2025/solutions/main.tex`에 대회 정보와 해설 목록을 설정하고, 문제별 폴더의 `.tex`에 Beamer 슬라이드를 작성합니다. 이미지는 해당 문제 폴더의 `images/`에서 참조합니다. 공통 테마는 toolkit의 `src/kgupc_toolkit/resources/latex/layouts/beamer.tex`입니다. `latexmk`가 필요한 횟수만큼 컴파일하므로 목차, 링크, 참조도 갱신됩니다.
 
 에디토리얼의 문제 목록에서 번호나 제목을 클릭하면 해당 해설의 첫 슬라이드로 이동합니다. 새 해설을 추가할 때는 첫 프레임에 `\begin{frame}[label=problem-H]`처럼 라벨을 넣고, 목록에는 `\problemlink{H}{문제 제목}`을 사용합니다. 프레임 라벨과 링크는 [Beamer 공식 사용 설명서](https://tug.org/docs/latex/beamer/beameruserguide.pdf)의 하이퍼링크 기능을 사용합니다.
 
 ## 검증
 
 ```powershell
-python -m unittest discover -s tests -v
+& './2025/.venv/Scripts/python.exe' -m unittest discover -s ../../SOLUTIO-NEST/kgupc-toolkit/tests -v
 python tests/verify_pdfs.py
 ```
 
-첫 명령은 경로 선택과 잘못된 문제 목록의 오류 처리를 확인합니다. 두 번째는 `pdftotext`도 필요하며, 임시 대회를 만들어 실제 PDF를 빌드합니다. A 수정의 통합·개별 반영, B 유지, 본문 쪽 번호, 여러 페이지의 머리말, 상대 경로 그림, 예제 특수문자를 확인합니다. 실제 지문은 수정하지 않습니다. 검증용 PDF와 로그는 `2025/problems/build/verification/`에 남습니다.
+첫 명령은 toolkit의 경로 선택, 잘못된 문제 목록, 다른 버전이나 같은 버전의 변경된 템플릿 거부를 검사합니다. Linux/macOS에서는 `2025/.venv/bin/python`을 사용합니다. 두 번째는 `pdftotext`도 필요하며, 실제 대회와 다른 깊이의 임시 폴더에서 설치된 toolkit으로 PDF를 빌드합니다. A 수정의 통합·개별 반영, B 유지, 본문 쪽 번호, 여러 페이지의 머리말, 상대 경로 그림, 예제 특수문자를 확인합니다. 실제 지문은 수정하지 않습니다. 검증용 PDF와 로그는 `2025/problems/build/verification/`에 남습니다.
 
 ## 참고
 
