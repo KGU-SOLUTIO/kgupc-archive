@@ -1,11 +1,20 @@
 {
     "latex-workshop.latex.tools": [
         {
+            "name": "archive-build",
+            "command": "python",
+            "args": [
+                "%WORKSPACE_FOLDER%/scripts/build.py",
+                "%DOC%"
+            ]
+        },
+        {
             "name": "xelatex",
             "command": "xelatex",
             "args": [
                 "-synctex=1",
                 "-interaction=nonstopmode",
+                "-halt-on-error",
                 "-file-line-error",
                 "%DOC%"
             ]
@@ -14,6 +23,12 @@
 
     "latex-workshop.latex.recipes": [
         {
+            "name": "Archive: editorial / combined + individual problems",
+            "tools": [
+                "archive-build"
+            ]
+        },
+        {
             "name": "xelatex",
             "tools": [
                 "xelatex"
@@ -21,5 +36,6 @@
         }
     ],
 
-    "latex-workshop.latex.autoBuild.run": "onSave"
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.recipe.default": "first"
 }

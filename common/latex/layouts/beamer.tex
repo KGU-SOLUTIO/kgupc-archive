@@ -14,6 +14,9 @@
 \setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
 \setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
 
+\setbeamercolor{block title}{fg=white,bg=solutio-purple}
+\setbeamercolor{block body}{bg=solutio-purple!10}
+
 \setbeamertemplate{itemize item}{✓}
 \setbeamertemplate{enumerate item}{
     {\color{solutio-purple}\insertenumlabel.}
@@ -34,6 +37,9 @@
 }
 
 \newcommand{\sponsorimage}{}
+
+% Link contest-list entries to the labelled first frame of each solution.
+\newcommand{\problemlink}[2]{\hyperlink{problem-#1}{\textcolor{black}{#2}}}
 
 \newcommand{\backupbegin}{
    \newcounter{finalframe}

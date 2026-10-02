@@ -41,6 +41,8 @@
 *.pdfsync
 
 ## Build tool directories for auxiliary files
+build/
+__pycache__/
 # latexrun
 latex.out/
 

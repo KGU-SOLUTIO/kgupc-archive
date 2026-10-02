@@ -19,8 +19,27 @@
 	BoldItalicFont = *-BoldItalic
     ]
 
-\setmonofont{Cambria}
-\newfontfamily\consolas{Consolas}
+% Preserve Windows fonts when available; use bundled fonts elsewhere.
+\IfFontExistsTF{Cambria}{
+    \setmonofont{Cambria}
+}{
+    \setmonofont{D2Coding}[
+        Path = ../../common/fonts/,
+        Extension = .ttf,
+        UprightFont = *-Regular,
+        BoldFont = *-Bold
+    ]
+}
+\IfFontExistsTF{Consolas}{
+    \newfontfamily\consolas{Consolas}
+}{
+    \newfontfamily\consolas{D2Coding}[
+        Path = ../../common/fonts/,
+        Extension = .ttf,
+        UprightFont = *-Regular,
+        BoldFont = *-Bold
+    ]
+}
 
 \setmainhangulfont[interhchar=-0.06em]{NotoSerifCJKkr}[
     Path = ../../common/fonts/,

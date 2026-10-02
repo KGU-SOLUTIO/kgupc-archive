@@ -1,24 +1,50 @@
+% !TeX root = main.tex
+% Engine: XeLaTeX, selected by the archive build recipe.
+
 \documentclass[11pt]{article}
 
 \input{../../common/latex/layouts/problem.tex}
 
 \title{KGUPC 2025 Problem Set}
 \author{Solutio in Kyonggi Univ.}
-\date{}
+\date{2025년 10월 29일}
+\renewcommand{\contestname}{KGUPC 2025}
+\renewcommand{\contentsname}{문제 목록}
+
+% The build script defines \SelectedProblem only for an individual PDF.
+\newif\ifproblemselected
+\newcommand{\includeproblem}[2]{%
+    \ifdefined\SelectedProblem
+        \ifdefstring{\SelectedProblem}{#1}{%
+            \problemselectedtrue
+            \import{#1/}{#2}%
+        }{}%
+    \else
+        \import{#1/}{#2}%
+    \fi
+}
 
 \begin{document}
 
-\maketitle
+\ifdefined\SelectedProblem
+\else
+    % Front matter has no printed page number or duplicate PDF page anchors.
+    \hypersetup{pageanchor=false}
+    \pagenumbering{gobble}
+    \maketitle
+    \thispagestyle{empty}
+    \tableofcontents
+    \clearpage
+    \pagenumbering{arabic}
+    \hypersetup{pageanchor=true}
+\fi
 
+\input{problem-list.tex}
 
-\newpage
-
-% \import{A/}{problem.tex}
-% \newpage
-
-% \import{B/}{problem.tex}
-% \newpage
-
-% \import{C/}{problem.tex}
+\ifdefined\SelectedProblem
+    \ifproblemselected\else
+        \PackageError{kgupc}{Unknown selected problem}{Check problem-list.tex.}
+    \fi
+\fi
 
 \end{document}
