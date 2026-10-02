@@ -51,10 +51,18 @@ def main():
         original = ROOT / "2025" / "problems"
         for filename in ("main.tex", "problem-list.tex"):
             shutil.copyfile(original / filename, directory / filename)
+        # This pagination fixture intentionally contains only A and B.
+        # The real archive manifest can grow independently (2025 now has A through G).
+        (directory / "problem-list.tex").write_text("".join(
+            f"\\includeproblem{{{letter}}}{{{next((original / letter).glob('*.tex')).name}}}\n"
+            for letter in ("A", "B")), encoding="utf-8")
         for letter in ("A", "B"):
             (directory / letter).mkdir()
             for source in (original / letter).glob("*.tex"):
-                shutil.copyfile(source, directory / letter / source.name)
+                # Keep pagination checks independent of real statements as they grow.
+                (directory / letter / source.name).write_text(
+                    f"\\problemheader{{{letter}}}{{검증 문제 {letter}}}\n"
+                    "\\problemlimits{}{}\n검증용 본문입니다.\n", encoding="utf-8")
 
         run_build(directory / "main.tex", logs / "initial.log")
         combined = directory / "main.pdf"
@@ -77,7 +85,7 @@ def main():
         statement = next((directory / "A").glob("*.tex"))
         with statement.open("a", encoding="utf-8") as source:
             source.write(r"""
-\problemlimits{1초}{512MB}
+\problemlimits{1}{512}
 ARCHIVE-SYNC-MARKER
 \includegraphics[width=1cm]{images/logo.png}
 \SampleSection
@@ -101,6 +109,8 @@ ARCHIVE-A-CONTINUED
             require("literal_#%{}" in text, "Sample special characters changed")
             require("예제 입력 2" in text and "예제 출력 2" in text, "Missing sample titles")
             require("512MB" in text, "Missing problem limits")
+            require("시간 제한: 1초 | 메모리 제한: 512MB" in " ".join(text.split()),
+                    "Numeric limits must add units and the separator")
         require("ARCHIVE-SYNC-MARKER" not in b_text, "A edit leaked into B")
         require(hashlib.sha256(individual_b.read_bytes()).hexdigest() == b_hash,
                 "Unchanged B PDF was rewritten")

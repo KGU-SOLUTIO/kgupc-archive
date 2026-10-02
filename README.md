@@ -28,7 +28,7 @@ python scripts/setup_toolkit.py 2025 --source ../../SOLUTIO-NEST/kgupc-toolkit
 python scripts/setup_toolkit.py 2025 --wheel C:/downloads/kgupc_toolkit-1.0.0-py3-none-any.whl
 ```
 
-현재 초기 구현은 로컬에만 있으며 원격 v1.0.0 태그·wheel 릴리스는 아직 배포하지 않았습니다. 첫 공개 시 해당 커밋과 wheel을 toolkit의 릴리스로 보관해야 합니다. 패키지 소스는 toolkit에 한 벌만 두고, 대회별 설치 환경과 패키지 캐시는 Git에서 제외합니다.
+정식 `1.0.0` 소스는 toolkit의 `v1.0.0` 태그로 고정합니다. 다른 컴퓨터에서는 해당 태그를 clone하여 위 `--source` 설치를 실행하거나, 그 태그에서 만든 wheel을 `--wheel`로 설치합니다. 설치 전에 고정된 대회 내용 해시를 검증합니다. 패키지 소스는 toolkit에 한 벌만 두고, 대회별 설치 환경과 패키지 캐시는 Git에서 제외합니다.
 
 ## PDF 생성
 
@@ -51,6 +51,11 @@ python scripts/build.py 2025/problems/A/kgu-solutio-kgu-ai-cse.tex
 | 문제 통합본 | `2025/problems/main.pdf` |
 | 문제 A 개별본 | `2025/problems/A/kgu-solutio-kgu-ai-cse.pdf` |
 | 문제 B 개별본 | `2025/problems/B/parking-fee-system.pdf` |
+| 문제 C 개별본 | `2025/problems/C/sociality-of-sorting.pdf` |
+| 문제 D 개별본 | `2025/problems/D/convention-center-escape.pdf` |
+| 문제 E 개별본 | `2025/problems/E/evenly-cooked-steak.pdf` |
+| 문제 F 개별본 | `2025/problems/F/connect-the-stars.pdf` |
+| 문제 G 개별본 | `2025/problems/G/grand-subterranean-city.pdf` |
 
 통합본에는 표지와 문제 목록이 포함되며, 표지·목록은 쪽 번호에서 제외하고 문제 A부터 1쪽으로 시작합니다. 각 문제는 새 페이지에서 시작합니다. 개별본은 해당 지문만 포함하고 1쪽부터 시작합니다. 두 모드는 **같은 지문과 같은 레이아웃**을 사용합니다. 개별 지문을 복사하거나 PDF를 잘라서 만들지 않습니다.
 
@@ -64,13 +69,19 @@ VS Code에서는 `.tex` 파일을 저장하면 기본 `Archive: editorial / comb
 
 ## 문제 지문 작성
 
-`2025/problems/A/kgu-solutio-kgu-ai-cse.tex`처럼 문제별 파일에 제목, 제한, 본문을 작성합니다. 현재 A/B는 작성용 틀이며, 공식 지문과 제한은 아직 입력되지 않았습니다.
+Polygon에서 종료된 대회의 지문을 가져오려면 [Polygon 가져오기 안내](docs/import-polygon.md)를 참고하세요. kgupc-pol2dom의 읽기 전용 API 가져오기로 지정한 문제만 갱신할 수 있습니다.
+
+Polygon 연동을 위한 기본 구조는 문제별 `statement-sections/korean/` 아래의 `name.tex`, `legend.tex`, `input.tex`, `output.tex`, `notes.tex`와 `example.01` / `example.01.a` 등입니다. 2025의 A~G는 모두 이 구조를 사용합니다. A는 기존 작성본을 보존하고, B~G는 Polygon에서 가져온 지문과 예제를 사용합니다. 제목·제한·절 제목·예제 배치는 toolkit이 조합하며, `statement.json`에서 언어와 제한을 설정합니다. 자세한 구조와 Polygon 예제 선택·표시용 입출력 처리 정책은 [Polygon 지문 안내](docs/polygon-statements.md)를 참고하세요.
+
+본문과 예제 파일을 지정해도 기존 빌드 명령으로 통합본·개별본이 갱신됩니다. `.tex`에는 TeX root 주석을 유지하고, 원시 예제 파일에는 주석을 넣지 않습니다. 기존 단일 `.tex` 방식도 지원합니다.
+
+아래는 호환성을 유지하는 기존 단일 `.tex` 방식의 예시입니다. 2025의 실제 문제는 분리된 본문과 예제를 사용합니다.
 
 ```tex
 % !TeX root = ../main.tex
 
 \problemheader{A}{문제 제목}
-\problemlimits{1초}{512MB}
+\problemlimits{1}{512}
 
 여기에 문제 본문을 작성합니다.
 
@@ -97,7 +108,7 @@ VS Code에서는 `.tex` 파일을 저장하면 기본 `Archive: editorial / comb
 예제 설명을 작성합니다.
 ```
 
-`\problemlimits{}{}`처럼 값을 비우면 제한 표시는 생략됩니다. 예제 환경은 공백과 줄바꿈을 보존하며, 본문과 달리 `_`, `%`, `#` 등을 이스케이프하지 않습니다. 그림은 문제 폴더 안의 `images/`에 두고 `\includegraphics{images/파일명.png}`로 참조하면 두 PDF 모드에서 같은 경로를 사용합니다. 상호 참조의 라벨은 `\label{A:figure}`처럼 문제별로 구분하세요.
+`\problemlimits{1}{256}`은 `시간 제한: 1초 | 메모리 제한: 256MB`로 표시됩니다. 숫자만 입력하며 단위는 템플릿에서 붙입니다. `\problemlimits{}{}`처럼 값을 비우면 제한 표시는 생략됩니다. 예제 환경은 공백과 줄바꿈을 보존하며, 본문과 달리 `_`, `%`, `#` 등을 이스케이프하지 않습니다. 그림은 문제 폴더 안의 `images/`에 두고 `\includegraphics{images/파일명.png}`로 참조하면 두 PDF 모드에서 같은 경로를 사용합니다. 상호 참조의 라벨은 `\label{A:figure}`처럼 문제별로 구분하세요.
 
 새 문제 C를 추가할 때는 `2025/problems/C/새문제.tex`를 만들고 `2025/problems/problem-list.tex`에 다음 한 줄을 추가합니다. 파일 맨 위에는 `% !TeX root = ../main.tex`를 넣습니다.
 
@@ -118,9 +129,10 @@ VS Code에서는 `.tex` 파일을 저장하면 기본 `Archive: editorial / comb
 ```powershell
 & './2025/.venv/Scripts/python.exe' -m unittest discover -s ../../SOLUTIO-NEST/kgupc-toolkit/tests -v
 python tests/verify_pdfs.py
+python tests/verify_polygon_pdfs.py
 ```
 
-첫 명령은 toolkit의 경로 선택, 잘못된 문제 목록, 다른 버전이나 같은 버전의 변경된 템플릿 거부를 검사합니다. Linux/macOS에서는 `2025/.venv/bin/python`을 사용합니다. 두 번째는 `pdftotext`도 필요하며, 실제 대회와 다른 깊이의 임시 폴더에서 설치된 toolkit으로 PDF를 빌드합니다. A 수정의 통합·개별 반영, B 유지, 본문 쪽 번호, 여러 페이지의 머리말, 상대 경로 그림, 예제 특수문자를 확인합니다. 실제 지문은 수정하지 않습니다. 검증용 PDF와 로그는 `2025/problems/build/verification/`에 남습니다.
+첫 명령은 toolkit의 경로 선택, 문제 목록과 분리 지문 검증, 버전·내용 검증을 검사합니다. Linux/macOS에서는 `2025/.venv/bin/python`을 사용합니다. PDF 검증에는 `pdftotext`도 필요합니다. `verify_pdfs.py`는 기존 단일 tex 방식의 통합·개별 반영, B 유지, 쪽 번호, 머리말, 그림과 예제 특수문자를 확인합니다. `verify_polygon_pdfs.py`는 분리 본문·예제·메타데이터 수정, 예제 추가·삭제, notes 생략, 풀이 제외, 긴 예제와 의존 파일 기록을 검증합니다. 실제 지문은 수정하지 않습니다. 검증용 PDF와 로그는 `2025/problems/build/` 아래에 남습니다.
 
 ## 참고
 

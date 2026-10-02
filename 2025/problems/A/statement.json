@@ -1,0 +1,9 @@
+{
+  "language": "korean",
+  "timeLimit": 1000,
+  "memoryLimit": 256,
+  "inputFile": "stdin",
+  "outputFile": "stdout",
+  "interactive": false,
+  "sampleLayout": "auto"
+}

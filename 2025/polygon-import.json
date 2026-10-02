@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "contestId": "52003",
+  "language": "korean",
+  "testset": "tests",
+  "problems": [
+    {
+      "letter": "A",
+      "problemId": 465772,
+      "slug": "kgu-solutio-kgu-ai-cse"
+    },
+    {
+      "letter": "B",
+      "problemId": 465796,
+      "slug": "parking-fee-system"
+    },
+    {
+      "letter": "C",
+      "problemId": 465791,
+      "slug": "sociality-of-sorting"
+    },
+    {
+      "letter": "D",
+      "problemId": 466464,
+      "slug": "convention-center-escape"
+    },
+    {
+      "letter": "E",
+      "problemId": 464984,
+      "slug": "evenly-cooked-steak"
+    },
+    {
+      "letter": "F",
+      "problemId": 466445,
+      "slug": "connect-the-stars"
+    },
+    {
+      "letter": "G",
+      "problemId": 472372,
+      "slug": "grand-subterranean-city"
+    }
+  ]
+}

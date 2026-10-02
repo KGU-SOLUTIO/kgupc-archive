@@ -65,7 +65,9 @@ def main() -> int:
                 built = output / f"kgupc_toolkit-{data['version']}-py3-none-any.whl"
                 if wheel_digest(built) != data["package_sha256"]:
                     raise ValueError("Toolkit source differs from the contest lock; the existing environment was not changed.")
-                wheel = cache / built.name
+                # Keep distinct development contents even when their version is unchanged.
+                wheel = cache / data["package_sha256"] / built.name
+                wheel.parent.mkdir(parents=True, exist_ok=True)
                 if not wheel.exists():
                     shutil.copyfile(built, wheel)
         else:
