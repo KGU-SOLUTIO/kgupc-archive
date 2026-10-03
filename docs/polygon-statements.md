@@ -1,6 +1,6 @@
 # Polygon 지문과 KGUPC PDF
 
-문제 본문은 Polygon의 지문 필드에 맞춰 분리합니다. toolkit이 제목, 제한, 절 제목과 예제 상자를 조합하고, pol2dom은 Polygon에서 가져온 데이터를 이 구조로 내보냅니다. 구조를 맞췄다고 자동으로 Polygon과 동기화되는 것은 아닙니다. 인증·다운로드와 DOMjudge 업로드는 다음 구현 단계입니다.
+문제 본문은 Polygon의 지문 필드에 맞춰 분리합니다. toolkit이 제목, 제한, 절 제목과 예제 상자를 조합하고, pol2dom은 Polygon에서 가져온 데이터를 이 구조로 내보냅니다. pol2dom에는 인증·다운로드와 DOMjudge 연동이 구현되어 있습니다. archive는 별도로 복사한 공개 자료를 보관하며, 여기서 편집한 지문을 Polygon이나 DOMjudge와 자동으로 동기화하지 않습니다.
 
 ## 현재 문제 구조
 
@@ -84,6 +84,6 @@ python scripts/build.py 2025/problems/A/statement-sections/korean/example.02
 
 `kgupc_pol2dom.polygon.export_statement()`은 이미 가져온 `problem.info`, 선택 언어의 `problem.statements`, 한 testset의 `problem.tests`, `problem.testInput` / `problem.testAnswer` 결과와 리소스 바이트를 받습니다. 새 로컬 폴더에 위 구조를 생성합니다. 기존 자료가 있는 폴더는 덮어쓰지 않습니다.
 
-인증·API 호출, 검증 실행, DOMjudge 패키지 생성·업로드는 아직 구현하지 않았습니다. 향후 Polygon 패키지를 가져올 때도 동일한 렌더러에 연결할 수 있습니다. 공개 pol2dom 저장소에는 실제 준비 중인 대회 자료를 넣지 않습니다.
+pol2dom은 Polygon API로 지문과 Full 패키지를 가져오고, toolkit으로 PDF를 만든 뒤 DOMjudge에 연동합니다. archive 공개용 자료는 `export-archive`로 로컬의 무시된 폴더에 생성하고 운영자가 직접 복사합니다. 자세한 절차는 [대회 폴더 인계 안내](import-polygon.md)를 참고하세요. 공개 pol2dom 저장소에는 실제 준비 중인 대회 자료를 커밋하지 않습니다.
 
 그림과 일반 TeX 표현은 [Polygon 지문 매뉴얼](https://polygon.codeforces.com/docs/statements-tex-manual)의 지원 구문을 사용합니다. Polygon 전용 커스텀 명령을 쓴 지문은 정의 파일을 함께 처리하는 추가 작업이 필요합니다.

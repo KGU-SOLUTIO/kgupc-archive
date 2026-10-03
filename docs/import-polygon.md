@@ -1,25 +1,66 @@
-# Polygon에서 종료된 대회 지문 가져오기
+# 종료된 대회 폴더 인계하기
 
-변환 코드는 kgupc-pol2dom에, 템플릿과 렌더러는 kgupc-toolkit에 있습니다. 아카이브는 가져온 공개 지문과 PDF를 보관합니다.
+템플릿과 PDF 빌드는 kgupc-toolkit, Polygon 다운로드와 DOMjudge 연동은 kgupc-pol2dom이 담당합니다. 이 저장소는 종료된 대회의 편집 가능한 지문·해설과 PDF를 보관합니다. **pol2dom이 archive 저장소를 직접 수정하지 않습니다.**
 
-1. kgupc-pol2dom 환경에 toolkit `v1.0.0`과 pol2dom을 설치합니다. 대회의 `toolkit.lock.json`과 설치 내용이 일치해야 합니다.
-2. Polygon Settings에서 API 키를 발급해 로컬 환경변수 또는 kgupc-pol2dom의 Git에서 제외된 `.env`에 `POLYGON_API_KEY`, `POLYGON_API_SECRET`을 설정합니다. 필요한 경우 `POLYGON_PIN`을 설정합니다. 인증 정보를 Git이나 채팅에 넣지 않습니다.
-3. `.env`에 `POLYGON_CONTEST_URL`도 설정하고 `polygon-list`로 대상 대회와 문제 목록을 확인합니다. 종료된 2025는 [확인된 대응표](../2025/polygon-import.json)를 사용할 수 있습니다. 아카이브 반영에는 명시적인 `contestId`가 필요하며, `.env`의 대회와 다르면 중단합니다.
-4. Polygon의 지문이 대회 최종본인지 확인하고 커밋한 뒤, 원하는 문제만 가져옵니다.
+## pol2dom에서 독립 폴더 생성
 
-API 키 위치는 Polygon에 로그인한 뒤 Settings의 API Key 항목입니다. [공식 API 인증 안내](https://codeforces.github.io/polygon-misc/API#authorization)를 참고하세요. pol2dom 루트에서 실행하면 그 폴더의 `.env`를 자동으로 읽습니다. 다른 폴더에서 실행할 때는 `--env-file`로 경로를 지정할 수 있습니다. Windows 사용자 변수를 쓸 경우 시작 메뉴의 **계정의 환경 변수 편집 → 사용자 변수 → 새로 만들기**에서 값을 저장하면 됩니다. 특정 터미널의 `$env:`에만 설정하면 그 터미널에서 실행한 CLI에만 적용됩니다.
+kgupc-pol2dom의 `.env`에 `CONTEST_SLUG=2026-fall`, PDF 제목·날짜, Polygon 및 DOMjudge 접속 정보를 설정하고 전체 `deploy --build-packages`를 실행하면 `build/archive/2026-fall/`도 자동 생성됩니다. 일반 인계는 이 폴더를 복사하는 것으로 충분합니다. 전체 재실행 시 이전 폴더는 pol2dom의 무시된 `build/archive/history/`에 백업됩니다.
 
-아래는 **kgupc-pol2dom 루트**에서 실행합니다. 경로는 실제 로컬 위치로 바꾸세요.
+실제 대회 최종 연동에 사용한 전체 bundle의 실행 폴더를 보관합니다. 내보내기는 해당 로컬 파일을 복사하므로 Polygon의 현재 지문을 다시 가져오지 않습니다. 부분 연동 결과는 전체 대회 내보내기에 사용할 수 없습니다.
+
+과거 특정 bundle을 별도로 내보내야 할 때만 아래 명령을 사용합니다. kgupc-pol2dom 루트에서 실행하며, 경로는 예시입니다.
 
 ```powershell
-.venv/Scripts/python -m kgupc_pol2dom polygon-list
-.venv/Scripts/python -m kgupc_pol2dom archive-import ../../KGU-SOLUTIO/kgupc-archive/2025/polygon-import.json --contest ../../KGU-SOLUTIO/kgupc-archive/2025 --letters B C D E F G --replace --render
+.venv/Scripts/python -m kgupc_pol2dom export-archive "C:/Users/me/kgupc-work/deploy-12345/runs/최종-실행-ID" --name 2026-fall
 ```
 
-이 명령은 A를 보존하고, B~G를 A와 동일한 분리 지문 구조로 만들고, 문제 목록과 통합/개별 PDF를 갱신합니다. B의 기존 틀은 `2025/build/polygon-backups/`에 백업한 뒤 교체합니다. 지문 변경은 Polygon에서 하고 이 명령으로 다시 가져오는 것을 권장합니다.
+출력은 kgupc-pol2dom의 Git에서 제외된 `build/archive/2026-fall/`입니다.
 
-준비 중인 신규 대회는 `.env`에 해당 대회 URL을 설정한 뒤 `prepare --render`로 생성합니다. 기본 출력은 사용자 홈의 `kgupc-work/contest-<ID>/`이며 문제 번호와 ID 대응표도 자동으로 생성합니다. `--output`으로 경로를 바꿀 수 있지만 모든 Git 작업 트리 내부 경로는 거부합니다. 지문 수정 후 `prepare --replace --render`로 갱신합니다. 아카이브는 대회가 종료되고 공개해도 되는 자료만 별도 `archive-import` 명령으로 반영합니다. 명령 자체가 대회 종료 여부를 판단하지 않으므로 운영진의 확인이 필요합니다.
+```text
+2026-fall/
+  toolkit.lock.json
+  requirements.txt
+  archive-source.json
+  problems/
+    main.tex
+    main.pdf
+    problem-list.tex
+    A/
+      <문제 이름>.tex
+      <문제 이름>.pdf
+      statement.json
+      polygon-source.json
+      statement-sections/korean/
+        본문·입력·출력·설명·예제·이미지
+    B/ ...
+```
 
-`polygon-source.json`은 문제 ID와 revision, 가져온 시각을 기록합니다. API는 현재 작업 사본을 읽으므로 이 방식으로 임의의 과거 revision을 지정할 수는 없습니다. 과거 최종본과 Polygon 현재 지문이 다르면 먼저 최종본을 확보해야 합니다. 생성 정답이 없거나 한글 지문이 없거나 가져오는 동안 revision이 바뀌면 실패합니다. 미커밋 변경 허용 옵션 `--working-copy`는 준비 중인 로컬 대회용입니다.
+내보내기에는 API 접속이나 인증 정보가 필요하지 않습니다. 전체 채점 테스트·채점기·정답 코드가 담긴 ZIP과 `.env`, 빌드 중간 파일은 내보내지 않습니다. PDF와 원본 지문, 대회 템플릿 lock을 그대로 보존합니다. 실제 대회가 종료되고 공개 가능한지는 운영진이 확인합니다.
 
-전체 테스트·채점기와 DOMjudge 업로드는 이 단계에 포함하지 않습니다. 종료된 대회의 공개 지문·리소스·예제·PDF만 검토해 커밋합니다. 유지할 문제까지 포함해 임시 폴더에서 통합/개별 PDF를 완성한 뒤 반영하므로 다운로드나 PDF 빌드 실패 시 기존 문제는 보존됩니다. PDF 뷰어가 결과물 교체를 막으면 반영된 지문과 백업은 남으므로 뷰어를 닫고 다시 가져오거나 빌드하세요.
+## 운영자가 archive에 복사
+
+1. 최종 지문·예제·PDF와 공개 가능 여부를 확인합니다.
+2. 생성된 **`2026-fall` 폴더 자체를 이 저장소 루트로 복사**합니다. 별도 빈 대회 구조를 만들 필요가 없습니다.
+3. `2026-fall/problems/main.tex`의 대회 제목·작성자·날짜를 정리합니다.
+4. 해설은 `2026-fall/solutions/`에서 작성하거나 별도로 준비한 해설을 추가합니다. pol2dom이 Polygon 풀이를 Beamer 해설로 자동 변환하지는 않습니다.
+5. 해당 대회 lock과 일치하는 toolkit 환경을 준비하고 PDF를 다시 빌드합니다.
+6. 변경 내용을 검토해 archive에서 직접 commit/push합니다.
+
+설치·빌드는 이 저장소 루트에서 실행합니다. toolkit 소스 경로는 대회에 사용한 정확한 커밋의 checkout을 가리켜야 합니다.
+
+```powershell
+python scripts/setup_toolkit.py 2026-fall --source C:/tools/kgupc-toolkit
+python scripts/build.py 2026-fall/problems/main.tex
+```
+
+원본 wheel을 보관했다면 `--source` 대신 `--wheel C:/releases/kgupc_toolkit-1.0.0-py3-none-any.whl`을 사용합니다. 버전 번호만 같아도 내용 해시가 다르면 설치를 거부하므로 정확한 커밋 또는 wheel을 보관해야 합니다.
+
+복사 후에는 archive의 `.tex`를 편집하고 toolkit으로 통합·개별 PDF를 재생성할 수 있습니다. Polygon이나 pol2dom에 다시 접속할 필요가 없습니다.
+
+## 기존 자료가 있는 경우
+
+같은 이름의 대회가 이미 있다면 폴더를 통째로 덮어쓰지 말고 필요한 변경만 직접 반영합니다. 특히 현재 2025 archive 지문은 Polygon과 다르므로 기존 교정본을 유지합니다. 과거에 사용한 `polygon-import.json`은 문제 ID 대응 기록이지 대회 당시 지문의 백업이 아닙니다.
+
+`archive-source.json`은 내보낼 당시의 revision과 파일 해시를 기록합니다. archive에서 이후 수정했다면 해시와 달라질 수 있으며, 수정 이력은 Git으로 관리합니다. DOMjudge에서 별도로 수정한 지문은 로컬 bundle에 자동 반영되지 않으므로 공개 전에 실제 최종본과 대조합니다.
+
+기존에 archive 경로를 받아 직접 덮어쓰던 `archive-import` 명령은 제거했습니다.

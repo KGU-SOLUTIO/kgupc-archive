@@ -74,7 +74,7 @@ VS Code에서는 `.tex` 파일을 저장하면 기본 `Archive: editorial / comb
 
 ## 문제 지문 작성
 
-Polygon에서 종료된 대회의 지문을 가져오려면 [Polygon 가져오기 안내](docs/import-polygon.md)를 참고하세요. kgupc-pol2dom의 읽기 전용 API 가져오기로 지정한 문제만 갱신할 수 있습니다.
+종료된 대회의 지문을 추가하려면 [대회 폴더 인계 안내](docs/import-polygon.md)를 참고하세요. kgupc-pol2dom에서 편집 가능한 지문과 PDF가 들어 있는 독립 폴더를 생성하고, 운영자가 이 저장소에 직접 복사합니다. pol2dom이 archive 파일을 직접 갱신하지 않습니다.
 
 Polygon 연동을 위한 기본 구조는 문제별 `statement-sections/korean/` 아래의 `name.tex`, `legend.tex`, `input.tex`, `output.tex`, `notes.tex`와 `example.01` / `example.01.a` 등입니다. 2025의 A~G는 모두 이 구조를 사용합니다. A는 기존 작성본을 보존하고, B~G는 Polygon에서 가져온 지문과 예제를 사용합니다. 제목·제한·절 제목·예제 배치는 toolkit이 조합하며, `statement.json`에서 언어와 제한을 설정합니다. 자세한 구조와 Polygon 예제 선택·표시용 입출력 처리 정책은 [Polygon 지문 안내](docs/polygon-statements.md)를 참고하세요.
 
