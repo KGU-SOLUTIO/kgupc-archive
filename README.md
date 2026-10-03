@@ -13,12 +13,13 @@ Based on:
 - `python`, `xelatex`, `latexmk`를 터미널에서 실행할 수 있어야 합니다. MiKTeX에서 `latexmk`를 사용하려면 Perl도 필요합니다.
 - VS Code에서는 LaTeX Workshop 확장을 설치하고 저장소 루트 폴더를 엽니다.
 - Windows의 기존 Cambria/Consolas 서체를 유지하며, 해당 서체가 없는 환경에서는 toolkit에 포함된 D2Coding을 사용합니다.
+- 문제집의 영문은 Arial, 한글은 toolkit에 포함된 Noto Sans CJK KR을 사용합니다. Arial이 없는 환경에서는 toolkit의 Inter로 대체합니다. 수식과 예제 글꼴, 에디토리얼 글꼴은 유지합니다.
 
 각 대회는 `toolkit.lock.json`에 toolkit 버전과 템플릿·글꼴·렌더러 내용 해시를 고정하고, 해당 대회의 `.venv`에 일반 설치합니다. 2025의 초기 버전은 `1.0.0`입니다. 개발 중 toolkit 소스를 바꾸어도 이미 설치된 2025의 템플릿은 변경되지 않습니다. 기존 대회의 lock을 최신 템플릿에 맞춰 덮어쓰지 않습니다.
 
 현재 2025 작업본은 요청에 따라 문단 사이 여백과 예제 글꼴을 조정한 toolkit을 사용하며 버전 번호 `1.0.0`을 유지합니다. 문단 내부의 줄 간격은 원래 `1.08`을 사용하고, 빈 줄로 나뉜 문단 사이에는 `0.75em` 여백을 둡니다. 목록 항목 사이 간격은 `0.2em`, 입력·출력 등의 제목 앞 간격은 `3.5ex`이며, 별도의 ‘예제’ 제목 없이 예제 상자 제목으로 구분합니다. 이 변경에 한해 2025의 내용 해시와 설치 환경을 함께 갱신했습니다. 기존 `v1.0.0` 태그와는 해시가 다르므로 아래 `--source` 명령에 조정된 소스를 사용하거나 일치하는 wheel을 설치해야 합니다. 태그의 원본은 보존하며 다른 대회의 lock은 변경하지 않습니다.
 
-현재 2025의 lock과 일치하는 toolkit 소스는 [커밋 `7e3071d`](https://github.com/SOLUTIO-NEST/kgupc-toolkit/commit/7e3071d1970dc12240c62fee38ad300e0e7b2a43)입니다. 다른 컴퓨터에서 2025를 빌드할 때에는 이 커밋의 소스를 사용합니다.
+현재 2025의 lock과 일치하는 toolkit 소스는 [커밋 `3732499`](https://github.com/SOLUTIO-NEST/kgupc-toolkit/commit/373249973347711ef7aaed1283aa328ae3c23b66)입니다. 다른 컴퓨터에서 2025를 빌드할 때에는 이 커밋의 소스를 사용합니다.
 
 초기 로컬 개발 환경에서는 toolkit을 별도 저장소로 clone하고 아래 설치를 한 번 실행합니다. 소스에서 wheel을 생성할 때 기본 Python 환경에 `setuptools>=68`이 필요합니다. 원본 저장소를 변경하지 않고 임시 복사본에서 빌드하며, lock과 내용이 일치하는 wheel만 설치합니다.
 
