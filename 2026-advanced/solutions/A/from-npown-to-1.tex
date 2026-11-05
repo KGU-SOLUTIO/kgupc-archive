@@ -1,0 +1,36 @@
+% !TeX root = ../main.tex
+
+\setproblem{A}{\ProblemTitleA}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-A]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13} \\
+        태그: \tagtext{\#math, \#exponentiation\_by\_squaring}\\
+        예상 난이도: \tiertext{Silver1}
+    }
+
+    \begin{itemize}
+        \item 제출 31번, 정답 10명 (정답률 32.6\%)
+        \item 처음 푼 사람: ㅈㄱㅇ (00:01:56)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{\pletter}. \ptitle}
+     \begin{itemize}
+        \item KGUPC를 주최한 경기대 PS 동아리 Solutio를 소개하는 문제였습니다.
+        \item 분할 정복을 이용한 거듭제곱으로 $O(\log n)$에 해결할 수 있습니다.
+        \[
+        \left.
+        \begin{aligned}
+            x^n     &= x^{n/2} \times x^{n/2} \\
+            x^{n/2} &= x^{n/4} \times x^{n/4} \\
+                    &\ \vdots \\
+            x^2     &= x \times x
+        \end{aligned}
+        \quad\right\}\quad \text{깊이 } O(\log n)
+        \]
+        \item {\consolas\small\sout{pow(n, n, MOD)}}
+    \end{itemize}
+\end{frame}

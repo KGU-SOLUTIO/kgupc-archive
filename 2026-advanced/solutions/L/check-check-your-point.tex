@@ -1,0 +1,43 @@
+% !TeX root = ../main.tex
+
+\setproblem{L}{\ProblemTitleL}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-L]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13}\\
+        태그: \tagtext{\#tsp, \#greedy}\\
+        예상 난이도: \tiertext{Platinum5}
+    }
+    \begin{itemize}
+        \item 제출 2번, 정답 0명 (정답률 0\%)
+        \item 처음 푼 사람: -
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+
+    \begin{itemize}
+        \item 거리 $M$을 순간이동할 수 있고, 쿨타임 $K$를 고려해야 하는 TSP입니다.
+        \item 주어지는 모든 좌표는 정수 좌표이며 서로 다르고, $M$과 $K$ 또한 정수이기 때문에 \\
+        $a$에서 $b$로 갈 때, 정수 거리에 순간이동을 한 번 사용한다면 \\
+        $\lceil |ak| \rceil + \lceil |k'b| \rceil = \lceil |ab| - M \rceil = \lceil |ab| \rceil - M$가 성립합니다. \\
+        순간이동 횟수에 대해 일반화됩니다.
+
+        \item $a$에서 $b$로 갈 때, 최대 $q$번의 순간이동을 할 수 있다 해 봅시다. \\
+        이때, 기룡이는 순간이동을 $q$번 사용해 쿨타임이 다시 $K$가 되고 $b$로 갈지,\\ 
+        $q-1$번 사용해 쿨타임이 $0$이고, $b$를 점령하자마자 순간이동할지 선택하면 됩니다. 
+    \end{itemize}
+\end{frame}
+\begin{frame}{\textbf{\pletter}. \ptitle}
+
+    \begin{itemize}
+        \item DP는 (방문한 노드 집합, 현재 노드, 출발할 때의 쿨타임)으로 잡습니다.\\
+        \texttt{dp[1 <{}< N][N][K+1]}로 선언하면 됩니다. \texttt{cool}을 출발할 때 기준으로 잡는 이유는 점령 시간 $o_i$ 때문입니다.
+
+        \item 모든 노드 쌍($O(N^2)$), 모든 출발 쿨타임($K+1$), \\
+        마지막에 순간이동을 할지 말지($\times 2$)에 대해 $O(N^2 K)$에 전처리하고, \\
+        $O(2^N N^2 K)$에 TSP를 돌리면 됩니다.
+    \end{itemize}
+\end{frame}

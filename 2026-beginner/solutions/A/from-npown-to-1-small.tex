@@ -1,0 +1,47 @@
+% !TeX root = ../main.tex
+
+\setproblem{A}{\ProblemTitleA}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-A]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13}\\
+        태그: \tagtext{\#math, \#implementation}\\
+        예상 난이도: \tiertext{Bronze4}
+    }
+    \begin{itemize}
+        \item 제출 20번, 정답 13명 (정답률 65\%)
+        \item 처음 푼 사람: ㅇㅎㅈ (00:00:38)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{곱할 때마다 나머지만 남기기}
+\begin{itemize}
+        \item KGUPC를 주최한 경기대 PS 동아리 Solutio를 소개하는 문제였습니다
+
+        \item $n^n$은 $n$을 $n$번 곱한 값입니다. \\
+        Small에서는 $n\le10^4$이므로 별도의 최적화 없이 $n$번 곱해도 됩니다.
+        \item 다만 곱할수록 값이 너무 커지니, 매번 $P=1\,000\,000\,007$로 나눈 나머지만 남깁니다.
+        \item 지문에 나온 성질 덕분에 마지막에 한 번 나눈 것과 결과가 같습니다.
+        \[
+            (ab)\bmod P=((a\bmod P)(b\bmod P))\bmod P
+        \]
+        \item 예를 들어 $n=3$이면 $1\to3\to9\to27$로 계산합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{구현하기}
+\begin{enumerate}
+        \item 답을 저장할 변수 $r$을 $1$로 둡니다.
+        \item $r=(r\times n)\bmod P$를 $n$번 반복합니다.
+        \item 마지막 $r$을 출력합니다.
+    \end{enumerate}
+    \begin{itemize}
+        \item $r<P$여도 $r\times n$은 약 $10^{13}$까지 커질 수 있습니다. \mbox{C++}에서는 곱셈을 \texttt{long long}으로 계산해야 합니다.
+        \item 반복 횟수가 $n$번이므로 시간 복잡도는 $O(n)$, 공간은 $O(1)$입니다.
+        \item \sout{Advanced의 Large를 포함하여 압도적으로 빠른 퍼솔이 나왔습니다.}
+    \end{itemize}
+\end{frame}

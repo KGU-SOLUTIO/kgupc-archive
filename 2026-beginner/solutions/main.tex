@@ -1,0 +1,109 @@
+% !TeX root = main.tex
+% Engine: XeLaTeX, selected by scripts/build.py.
+
+\documentclass[11pt, aspectratio=169]{beamer}
+\input{build/toolkit-path.tex}
+\input{\KGUPCToolkitRoot/latex/layouts/beamer.tex}
+\hypersetup{filecolor=solutio-purple}
+\usepackage{catchfile}
+\usepackage{xr}
+\usetikzlibrary{arrows.meta,matrix,decorations.pathreplacing}
+
+% 어드밴스드를 먼저 빌드하면 PDF의 실제 페이지 번호를 가져올 수 있다.
+\externaldocument[advanced-]{../../2026-advanced/solutions/main}
+\newcommand{\AdvancedEditorialURL}{https://kgu-solutio.github.io/kgupc-archive/2026-advanced/solutions/main.pdf}
+\newcommand{\advancededitoriallink}[2]{%
+    \ifnum\getpagerefnumber{advanced-#1}=0\relax
+        \PackageError{editorial-links}{Advanced editorial page is missing: #1}
+            {Build 2026-advanced/solutions/main.tex before the beginner editorial.}%
+    \fi
+    \href{\AdvancedEditorialURL\#page=\getpagerefnumber{advanced-#1}}{#2}%
+}
+
+% 문제 목록의 배치를 유지하고, 아래쪽 빈 공간에 후기 링크를 표시한다.
+\newcommand{\afterwordlink}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=south,inner sep=0pt,font=\footnotesize]
+            at ([yshift=1cm]current page.south)
+            {\hyperlink{afterword}{출제진 후기 보기}};
+    \end{tikzpicture}%
+}
+
+\title[KGUPC 2026 (Beginner) 에디토리얼]
+      {KGUPC 2026 (Beginner) \newline 에디토리얼}
+\subtitle{Official Solutions}
+\author{Solutio in Kyonggi Univ. KGUPC 2026 출제진}
+% 기존 2025 템플릿의 이미지. 2026 후원사 이미지로 교체한다.
+\renewcommand{\sponsorimage}{../sponsors.png}
+\date{2026년 10월 30일}
+
+% 문제 제목은 원본 name.tex에서 읽는다. 제목을 중복으로 수정하지 않는다.
+\CatchFileDef{\ProblemTitleA}{../problems/A/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleB}{../problems/B/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleC}{../problems/C/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleD}{../problems/D/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleE}{../problems/E/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleF}{../problems/F/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleG}{../problems/G/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleH}{../problems/H/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleI}{../problems/I/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleJ}{../problems/J/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleK}{../problems/K/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleL}{../problems/L/statement-sections/korean/name.tex}{\endlinechar=-1}
+
+\begin{document}
+    \setcounter{framenumber}{-1}
+    \frame{\titlepage}
+
+    \begin{frame}{문제 목록}
+        \begin{center}
+            \setlength{\tabcolsep}{4.5pt}
+            \begin{tabular}{cl|c|c}
+                \hline
+                문제 & & 예상 난이도 & 출제자 \\
+                \hline
+                \problemlink{A}{\textbf{A}} & \problemlink{A}{\ProblemTitleA} & \tiertext{Bronze4} & areian13 \\
+                \problemlink{B}{\textbf{B}} & \problemlink{B}{\ProblemTitleB} & \tiertext{Bronze3} & areian13 \\
+                \problemlink{C}{\textbf{C}} & \problemlink{C}{\ProblemTitleC} & \tiertext{Bronze3} & mingmingmon \\
+                \problemlink{D}{\textbf{D}} & \problemlink{D}{\ProblemTitleD} & \tiertext{Bronze2} & mingmingmon \\
+                \problemlink{E}{\textbf{E}} & \problemlink{E}{\ProblemTitleE} & \tiertext{Bronze2} & areian13 \\
+                \problemlink{F}{\textbf{F}} & \problemlink{F}{\ProblemTitleF} & \tiertext{Bronze2} & areian13 \\
+                \problemlink{G}{\textbf{G}} & \problemlink{G}{\ProblemTitleG} & \tiertext{Bronze2} & areian13 \\
+                \problemlink{H}{\textbf{H}} & \problemlink{H}{\ProblemTitleH} & \tiertext{Bronze1} & mingmingmon \\
+                \problemlink{I}{\textbf{I}} & \problemlink{I}{\ProblemTitleI} & \tiertext{Bronze1} & mingmingmon \\
+                \problemlink{J}{\textbf{J}} & \problemlink{J}{\ProblemTitleJ} & \tiertext{Silver3} & areian13 \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}{문제 목록}
+        \begin{center}
+            \setlength{\tabcolsep}{4.5pt}
+            \begin{tabular}{cl|c|c}
+                \hline
+                문제 & & 예상 난이도 & 출제자 \\
+                \hline
+                \problemlink{K}{\textbf{K}} & \problemlink{K}{\ProblemTitleK} & \tiertext{Silver4} & ehdnjs14 \\
+                \problemlink{L}{\textbf{L}} & \problemlink{L}{\ProblemTitleL} & \tiertext{Silver3} & areian13 \\
+                \hline
+            \end{tabular}%
+            \afterwordlink
+        \end{center}
+    \end{frame}
+
+    % 풀이 순서는 문제셋과 동일하다.
+    \import{A}{from-npown-to-1-small.tex}
+    \import{B}{my-name-is-k1ry0n6.tex}
+    \import{C}{kiryong-is-hangry.tex}
+    \import{D}{kiryong-budget-book.tex}
+    \import{E}{every-monent-saving-life.tex}
+    \import{F}{do-you-need-multitap.tex}
+    \import{G}{one-more-picture-plz.tex}
+    \import{H}{kiryong-loves-movie.tex}
+    \import{I}{to-do-list.tex}
+    \import{J}{what-is-my-pair.tex}
+    \import{K}{ice-water-purifier-small.tex}
+    \import{L}{cut-dujjonku.tex}
+    \input{afterword.tex}
+\end{document}

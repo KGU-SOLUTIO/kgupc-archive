@@ -1,0 +1,47 @@
+% !TeX root = ../main.tex
+
+\setproblem{K}{\ProblemTitleK}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-K]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{mingmingmon}\\
+        태그: \tagtext{\#bruteforcing, \#backtracking}\\
+        예상 난이도: \tiertext{Silver2}
+    }
+    \begin{itemize}
+        \item 제출 14번, 정답 7명 (정답률 50\%)
+        \item 처음 푼 사람: ㅇㅅㅎ (01:02:05)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{하루의 메뉴 만들기}
+    \begin{itemize}
+        \item 서로 다른 반찬 $3$가지를 고르고, 선호도 합이 $10$ 이하인 조합만 메뉴로 저장합니다.
+        \item 가능한 메뉴는 최대 $\binom{7}{3}=35$개이므로, 이 중 $5$일의 메뉴를 고르면 됩니다.
+        \item 날짜의 순서를 바꾸어도 재고 사용량과 선호도 합의 최솟값은 같습니다.
+        \item 메뉴 번호가 감소하지 않게 골라, 순서만 다른 구성을 중복 탐색하지 않습니다.
+        \item 같은 메뉴를 여러 날 먹을 수 있으므로, 다음 날에도 같은 번호를 선택할 수 있습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{백트래킹으로 $5$일 구성하기}
+    \begin{itemize}
+        \item 날짜 수, 최소 메뉴 번호, 지금까지의 선호도 합의 최솟값을 관리합니다.
+        \item 메뉴에 필요한 반찬의 재고가 모두 남아 있다면, 각각 $1$씩 줄이고 다음 날을 탐색합니다.
+        \item 현재 메뉴의 선호도 합으로 최솟값을 갱신하고, 탐색 후에는 재고를 복구합니다.
+        \item 정확히 $5$일을 구성했다면, 해당 구성의 최솟값으로 정답을 갱신합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{탐색 줄이기}
+    \begin{itemize}
+        \item 최솟값은 더 커질 수 없으니, 이미 찾은 정답 이하라면 탐색을 중단합니다.
+        \item 또한 남은 날짜가 $d$일일 때, 남은 재고의 총합이 $3d$보다 작으면 중단합니다.
+        \item 메뉴 $35$개에서 $5$일치를 고르는 방법은 최대 $\binom{39}{5}=575\,757$가지입니다.
+    \end{itemize}
+\end{frame}

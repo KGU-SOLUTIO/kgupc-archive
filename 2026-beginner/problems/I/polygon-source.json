@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "problemId": 504804,
+  "owner": "mingmingmon",
+  "name": "to-do-list",
+  "revision": 15,
+  "workingCopyRevision": 15,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1
+  ],
+  "fetchedAt": "2026-10-29T10:55:55.966140+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "problemId": 505907,
+  "owner": "ehdnjs14",
+  "name": "ice-water-purifier",
+  "revision": 17,
+  "workingCopyRevision": 17,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1
+  ],
+  "fetchedAt": "2026-10-29T10:17:51.870149+00:00"
+}

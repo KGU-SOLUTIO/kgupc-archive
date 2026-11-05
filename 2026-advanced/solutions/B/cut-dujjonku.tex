@@ -1,0 +1,57 @@
+% !TeX root = ../main.tex
+
+\setproblem{B}{\ProblemTitleB}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-B]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13}\\
+        태그: \tagtext{\#math, \#geometry, \#combinatorics}\\
+        예상 난이도: \tiertext{Silver3}
+    }
+
+    \begin{itemize}
+        \item 제출 26번, 정답 7명 (정답률 26.9\%)
+        \item 처음 푼 사람: ㅈㄱㅇ (00:04:12)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \begin{itemize}
+        \item $k$번째 칼질은 이전의 $k-1$개 선분과 각각 최대 한 번씩 교차합니다.
+        \item 이전의 모든 선분과 원 안의 서로 다른 점에서 교차하면, 조각이 $k$개 늘어납니다.
+    \end{itemize}
+    \begin{center}
+        \subimport{images/}{cut-progression.tex}
+    \end{center}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \begin{itemize}
+        \item $k$번 잘랐을 때의 최대 조각 수를 $R(k)$라 두면
+        \[
+            R(k)=1+\sum_{i=1}^{k}i=1+\frac{k(k+1)}{2}
+        \]
+        \item $N>1$일 때 $R(t-1)<N\le R(t)$인 $t$가 최소 칼질 횟수의 하한입니다.
+        \item $t-1$번 잘라 $R(t-1)$조각을 만든 뒤, 마지막 칼질의 교차 횟수를 $0$부터 $t-1$까지 조절하면
+              $1$개부터 $t$개까지 늘릴 수 있으므로 정확히 $N$조각을 만들 수 있습니다.
+        \item 교차 횟수는 모든 선분과 교차하는 칼질을 바깥으로 옮기며, 끝점을 하나씩 지나도록 조절하면 됩니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \begin{itemize}
+        \item $1+\dfrac{t(t+1)}{2}\ge N$을 정리하면 다음 부등식을 얻습니다.
+        \[
+            t^2+t\ge 2N-2
+            \quad\Longleftrightarrow\quad
+            t\ge\frac{\sqrt{8N-7}-1}{2}\qquad (t\ge 0)
+        \]
+        \item 이 값을 올림하면 정답입니다. $N=1$일 때도 $0$이 나옵니다.
+        \[
+            \boxed{\left\lceil\frac{\sqrt{8N-7}-1}{2}\right\rceil}
+        \]
+        \item 정수 이분 탐색을 사용하면 실수 오차 없이 $O(\log N)$에 구할 수 있습니다.
+    \end{itemize}
+\end{frame}

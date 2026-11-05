@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "problemId": 614944,
+  "owner": "areian13",
+  "name": "do-you-need-multitap",
+  "revision": 3,
+  "workingCopyRevision": 3,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1,
+    2
+  ],
+  "fetchedAt": "2026-10-29T10:53:46.666742+00:00"
+}

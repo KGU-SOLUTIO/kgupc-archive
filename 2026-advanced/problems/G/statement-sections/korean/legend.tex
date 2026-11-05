@@ -1,0 +1,34 @@
+
+평면 위의 두 볼록다각형 $P,Q$와 $4$ 이상의 $2$의 거듭제곱인 정수 $N$에 대해, 두 다각형의 \textbf{만화경 곱} $P\circledast_N Q$를 다음과 같이 정의한다.
+
+먼저, $0\le i<N$인 각 정수 $i$에 대해 단위벡터 $u_i$를 정의한다.
+
+$$u_i=\left(\cos\frac{2\pi i}{N},\sin\frac{2\pi i}{N}\right)$$
+
+볼록다각형 $A$와 단위벡터 $u$에 대해, $A$의 \textbf{지지값} $h_A(u)$는 다음과 같다.
+
+$$h_A(u)=\max_{p\in A}(p\cdot u)$$
+
+여기서 $\cdot$은 두 벡터의 내적이다.
+
+다음 연산들을 정의한다.
+
+\begin{itemize}
+\item $R_i(A)$: $A$를 원점 중심으로 반시계 방향으로 $\frac{2\pi i}{N}$만큼 회전한 다각형
+\item $tA=\{ta\mid a\in A\}$: $A$를 $t$배 확대한 다각형 ($t\ge 0$)
+\item $A\oplus B=\{a+b\mid a\in A,b\in B\}$: 두 다각형의 \textbf{민코프스키 합}
+\end{itemize}
+
+이제 볼록다각형 $T$를 다음과 같이 정의한다.
+
+$$T=\frac{1}{N}\left(\bigoplus_{i=0}^{N-1}h_Q(u_i)R_i(P)\right)$$
+
+각 $0\le i<N$에 대해 반평면 $H_i$를 다음과 같이 정의한다.
+
+$$H_i=\left\{x\in\mathbb{R}^2\;\middle|\;x\cdot u_i\le h_T(u_i)\right\}$$
+
+두 볼록다각형의 \textbf{만화경 곱} $P\circledast_N Q$는 다음과 같다.
+
+$$P\circledast_N Q=\bigcap_{i=0}^{N-1}H_i$$
+
+두 볼록다각형 $P,Q$와 정수 $N$이 주어질 때, $P\circledast_N Q$의 넓이를 구하라.

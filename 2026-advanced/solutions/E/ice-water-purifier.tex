@@ -1,0 +1,37 @@
+% !TeX root = ../main.tex
+
+\setproblem{E}{\ProblemTitleE}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-E]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{ehdnjs14}\\
+        태그: \tagtext{\#dp, \#knapsack}\\
+        예상 난이도: \tiertext{Gold5}
+    }
+    \begin{itemize}
+        \item 제출 38번, 정답 6명 (정답률 15.9\%)
+        \item 처음 푼 사람: ㅈㄱㅇ (00:09:24)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+\begin{itemize}
+    \item 정수기를 한 대씩 살펴보며, 사용할지 사용하지 않을지를 결정합니다.
+    \item $dp[j]$를 지금까지 살펴본 정수기로 정확히 $j$개의 얼음을 얻는 데 필요한 최소 대수로 정의합니다.
+    \item 처음에는 $dp[0]=0$이고, 나머지는 모두 도달 불가능한 상태로 둡니다.
+    \item 얼음이 $a_i$개인 정수기를 사용하면, $j-a_i$개를 얻는 구성에 정수기 한 대를 추가할 수 있습니다.
+\end{itemize}
+\[
+    dp[j]\leftarrow\min\bigl(dp[j],dp[j-a_i]+1\bigr)
+\]
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+\begin{itemize}
+    \item 같은 정수기를 여러 번 사용하지 않도록 $j$를 큰 값부터 역순으로 갱신합니다.
+    \item $dp[K]$가 정답이며, 도달 불가능한 상태라면 $-1$을 출력합니다.
+    \item 시간 복잡도는 $O(NK)$, 공간 복잡도는 $O(K)$입니다.
+\end{itemize}
+\end{frame}

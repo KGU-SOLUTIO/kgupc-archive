@@ -1,0 +1,22 @@
+% #1: 격자 간격(cm), #2: 꼭짓점 좌표열, #3: x/y 꼭짓점 목록, #4: 설명
+\newcommand{\GridJoinDiagram}[4]{%
+    \begin{tikzpicture}[x=#1cm,y=#1cm,line join=round,line cap=round]
+        \fill[solutio-purple!12] plot coordinates {#2} -- cycle;
+        \foreach \i in {0,...,9} {
+            \draw[black!12,line width=0.25pt] (\i,0)--(\i,9);
+            \draw[black!12,line width=0.25pt] (0,\i)--(9,\i);
+            \foreach \j in {0,...,9}
+                \fill[black!45] (\i,\j) circle[radius=0.65pt];
+        }
+        \draw[solutio-purple,line width=1pt] plot coordinates {#2} -- cycle;
+        \foreach \x/\y in {#3} {
+            \pgfmathtruncatemacro{\inside}{\x>0 && \x<9 && \y>0 && \y<9}
+            \ifnum\inside=1
+                \fill[orange!85!black] (\x,\y) circle[radius=1.8pt];
+            \else
+                \fill[solutio-purple] (\x,\y) circle[radius=1.8pt];
+            \fi
+        }
+        \node[anchor=north,align=center,font=\small] at (4.5,-0.65) {#4};
+    \end{tikzpicture}%
+}

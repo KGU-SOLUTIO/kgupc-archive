@@ -1,0 +1,93 @@
+% !TeX root = main.tex
+% Engine: XeLaTeX, selected by scripts/build.py.
+
+\documentclass[11pt, aspectratio=169]{beamer}
+\input{build/toolkit-path.tex}
+\input{\KGUPCToolkitRoot/latex/layouts/beamer.tex}
+\usepackage{catchfile}
+\usetikzlibrary{arrows.meta,matrix,decorations.pathreplacing}
+
+% 문제 목록의 배치를 유지하고, 아래쪽 빈 공간에 후기 링크를 표시한다.
+\newcommand{\afterwordlink}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=south,inner sep=0pt,font=\footnotesize]
+            at ([yshift=1cm]current page.south)
+            {\hyperlink{afterword}{출제진 후기 보기}};
+    \end{tikzpicture}%
+}
+
+\title[KGUPC 2026 (Advanced) 에디토리얼]
+      {KGUPC 2026 (Advanced) \newline 에디토리얼}
+\subtitle{Official Solutions}
+\author{Solutio in Kyonggi Univ. KGUPC 2026 출제진}
+% 기존 2025 템플릿의 이미지. 2026 후원사 이미지로 교체한다.
+\renewcommand{\sponsorimage}{../sponsors.png}
+\date{2026년 10월 30일}
+
+% 문제 제목은 원본 name.tex에서 읽는다. 제목을 중복으로 수정하지 않는다.
+\CatchFileDef{\ProblemTitleA}{../problems/A/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleB}{../problems/B/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleC}{../problems/C/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleD}{../problems/D/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleE}{../problems/E/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleF}{../problems/F/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleG}{../problems/G/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleH}{../problems/H/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleI}{../problems/I/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleJ}{../problems/J/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleK}{../problems/K/statement-sections/korean/name.tex}{\endlinechar=-1}
+\CatchFileDef{\ProblemTitleL}{../problems/L/statement-sections/korean/name.tex}{\endlinechar=-1}
+
+\begin{document}
+    \setcounter{framenumber}{-1}
+    \frame{\titlepage}
+
+    \begin{frame}{문제 목록}
+        \begin{center}
+            \begin{tabular}{cl|c|c}
+                \hline
+                문제 & & 예상 난이도 & 출제자 \\
+                \hline
+                \problemlink{A}{\textbf{A}} & \problemlink{A}{\ProblemTitleA} & \tiertext{Silver1} & areian13 \\
+                \problemlink{B}{\textbf{B}} & \problemlink{B}{\ProblemTitleB} & \tiertext{Silver3} & areian13 \\
+                \problemlink{C}{\textbf{C}} & \problemlink{C}{\ProblemTitleC} & \tiertext{Gold3} & yhjang04 \\
+                \problemlink{D}{\textbf{D}} & \problemlink{D}{\ProblemTitleD} & \tiertext{Gold1} & ehdnjs14 \\
+                \problemlink{E}{\textbf{E}} & \problemlink{E}{\ProblemTitleE} & \tiertext{Gold5} & ehdnjs14 \\
+                \problemlink{F}{\textbf{F}} & \problemlink{F}{\ProblemTitleF} & \tiertext{Silver1} & yhjang04 \\
+                \problemlink{G}{\textbf{G}} & \problemlink{G}{\ProblemTitleG} & \tiertext{Diamond4} & areian13 \\
+                \problemlink{H}{\textbf{H}} & \problemlink{H}{\ProblemTitleH} & \tiertext{Platinum4} & yhjang04 \\
+                \problemlink{I}{\textbf{I}} & \problemlink{I}{\ProblemTitleI} & \tiertext{Silver3} & areian13 \\
+                \problemlink{J}{\textbf{J}} & \problemlink{J}{\ProblemTitleJ} & \tiertext{Gold2} & yhjang04 \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{frame}
+    \begin{frame}{문제 목록}
+        \begin{center}
+            \begin{tabular}{cl|c|c}
+                \hline
+                문제 & & 예상 난이도 & 출제자 \\
+                \hline
+                \problemlink{K}{\textbf{K}} & \problemlink{K}{\ProblemTitleK} & \tiertext{Silver2} & mingmingmon \\
+                \problemlink{L}{\textbf{L}} & \problemlink{L}{\ProblemTitleL} & \tiertext{Platinum5} & areian13 \\
+                \hline
+            \end{tabular}%
+            \afterwordlink
+        \end{center}
+    \end{frame}
+
+    % 풀이 순서는 문제셋과 동일하다.
+    \import{A}{from-npown-to-1.tex}
+    \import{B}{cut-dujjonku.tex}
+    \import{C}{high-tech-convenience-store.tex}
+    \import{D}{connects-grid-pointer.tex}
+    \import{E}{ice-water-purifier.tex}
+    \import{F}{loop-the-room.tex}
+    \import{G}{kaleidoscope-product.tex}
+    \import{H}{hongsam-game.tex}
+    \import{I}{what-is-my-pair.tex}
+    \import{J}{admins-and-reviewers.tex}
+    \import{K}{kiryong-mealprep.tex}
+    \import{L}{check-check-your-point.tex}
+    \input{afterword.tex}
+\end{document}

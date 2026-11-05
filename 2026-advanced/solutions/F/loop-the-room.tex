@@ -1,0 +1,26 @@
+% !TeX root = ../main.tex
+
+\setproblem{F}{\ProblemTitleF}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-F]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{yhjang04}\\
+        태그: \tagtext{\#bfs, \#grid\_graph}\\
+        예상 난이도: \tiertext{Silver1}
+    }
+    \begin{itemize}
+        \item 제출 14번, 정답 8명 (정답률 57.1\%)
+        \item 처음 푼 사람: ㅈㄱㅇ (00:15:42)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \begin{itemize}
+        \item 모든 이동에 $1$초가 걸리므로 BFS로 최단 시간을 구할 수 있습니다.
+        \item 지금 서 있는 칸은 벽이 아니므로, 경계를 넘을 때 도착할 칸이 벽인지만 확인하면 됩니다.
+        \item 일반적인 BFS에서 범위를 벗어난 좌표를 반대편 끝으로 옮겨 주기만 하면 됩니다.
+        \item 시간 복잡도는 $O(NM)$입니다.
+    \end{itemize}
+\end{frame}

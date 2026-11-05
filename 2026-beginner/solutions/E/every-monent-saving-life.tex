@@ -1,0 +1,41 @@
+% !TeX root = ../main.tex
+
+\setproblem{E}{\ProblemTitleE}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-E]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13}\\
+        태그: \tagtext{\#implementation, \#simulation}\\
+        예상 난이도: \tiertext{Bronze2}
+    }
+    \begin{itemize}
+        \item 제출 14번, 정답 12명 (정답률 85.7\%)
+        \item 처음 푼 사람: ㅅㅇㅅ (00:10:15)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{수정 사항이 있는지만 기억하기}
+\begin{itemize}
+        \item 각 파일에 저장하지 않은 수정 사항이 있는지만 알면 됩니다.
+        \item 이를 \texttt{modified[i]}에 저장합니다. 처음에는 모두 \texttt{false}입니다.
+        \item \texttt{EDIT i}: \texttt{modified[i]}를 \texttt{true}로 바꿉니다.
+        \item \texttt{SAVE i}: \texttt{modified[i]}가 \texttt{true}일 때만 저장 횟수를 $1$ 늘리고 \texttt{false}로 바꿉니다.
+        \item 같은 파일을 여러 번 수정해도 저장 한 번이면 충분하므로, 수정 횟수를 세지는 않습니다.
+        \item 수정하지 않은 파일을 저장하려 하면 아무 일도 일어나지 않습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{전체 저장도 같은 규칙으로 처리하기}
+\begin{itemize}
+        \item \texttt{SAVEALL}이면 모든 파일을 보며 \texttt{modified[i]}가 \texttt{true}인 파일만 저장합니다.
+        \item 파일을 하나 저장할 때마다 답을 $1$ 늘리고, 그 파일의 표시를 지웁니다.
+        \item \texttt{EDIT 1}, \texttt{EDIT 1}, \texttt{SAVEALL}을 순서대로 실행하면 저장은 한 번입니다.
+        \item 이어서 \texttt{SAVEALL}을 다시 실행해도 저장 횟수는 늘지 않습니다.
+        \item 마지막에 수정된 파일이 남아 있어도, 추가 저장을 했다고 세면 안 됩니다.
+        \item 시간 복잡도는 $O(NQ)$입니다. 최대 $1\,000\times1\,000$번 정도 확인하므로 충분합니다.
+    \end{itemize}
+\end{frame}

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "problemId": 604176,
+  "owner": "JangYeonghu",
+  "name": "admins-and-reviewers",
+  "revision": 5,
+  "workingCopyRevision": 5,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1
+  ],
+  "fetchedAt": "2026-10-29T10:22:12.555778+00:00"
+}

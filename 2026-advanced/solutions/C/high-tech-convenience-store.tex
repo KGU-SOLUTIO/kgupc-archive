@@ -1,0 +1,71 @@
+% !TeX root = ../main.tex
+
+\setproblem{C}{\ProblemTitleC}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-C]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{yhjang04}\\
+        태그: \tagtext{\#math, \#inclusion\_and\_exclusion / \#dp\_bitfield}\\
+        예상 난이도: \tiertext{Gold3}
+    }
+    \begin{itemize}
+        \item 제출 5번, 정답 3명 (정답률 60\%)
+        \item 처음 푼 사람: ㅈㄱㅇ (00:55:29)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{최소 이동 횟수}
+    \begin{itemize}
+        \item 옮기지 않은 김밥은 처음 순서 그대로 뒤쪽에 남으므로, $N-k+1,\ldots,N$번이 순서대로 놓여 있어야 합니다.
+        \item 반대로 나머지를 $N-k,\ldots,1$번 순으로 맨 앞으로 보내면 정렬됩니다.
+        \item 이러한 $k$의 최댓값을 $p$라 하면 기룡이의 최소 횟수는 $N-p$이며, 기계팔도 대칭으로 성립합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{정확히 $A,B$번 움직이기 위한 조건}
+    \begin{itemize}
+        \item $p=N-A$, $q=N-B$로 둡시다.
+        \item 기룡이가 움직이지 않는 김밥 집합은 $N-p+1,\ldots,N$번입니다.
+        \item 기계팔이 움직이지 않는 김밥 집합은 $1,\ldots,q$번입니다.
+        \item 각 집합의 김밥들은 처음부터 순서대로 놓여 있어야 합니다.
+        \item $p<N$이면 $N-p$번은 $N-p+1$번보다 뒤에 있어야 합니다.
+        \item $q<N$이면 $q+1$번은 $q$번보다 앞에 있어야 합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{적어도 $p,q$개를 움직이지 않는 배치}
+    \begin{itemize}
+        \item 움직이지 않는 김밥이 각각 적어도 $p,q$개인 배치의 수를 $F(p,q)$라 합시다.
+    \end{itemize}
+    \[
+        F(p,q)=
+        \begin{cases}
+            \dfrac{N!}{p!q!},&p+q\le N,\\[4pt]
+            1,&p+q>N.
+        \end{cases}
+    \]
+    \begin{itemize}
+        \item $p+q\le N$이면 두 집합이 겹치지 않아 내부 순서의 조건이 독립입니다.
+        \item $p+q>N$이면 두 집합이 겹쳐 정렬된 배치만 남습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{포함배제로 정답 구하기}
+    \begin{itemize}
+        \item 포함배제로 정확히 $p,q$개를 움직이지 않는 배치의 수를 구합니다.
+    \end{itemize}
+    \[
+        \boxed{F(p,q)-F(p+1,q)-F(p,q+1)+F(p+1,q+1)}
+    \]
+    \begin{itemize}
+        \item 인자가 $N+1$이 되는 항은 $0$으로 처리합니다.
+        \item 시간 복잡도는 $O(N)$입니다.
+        \item $N\le20$이므로 비트필드 DP를 사용해 $O(2^N N)$으로 해결할 수도 있습니다.
+    \end{itemize}
+\end{frame}

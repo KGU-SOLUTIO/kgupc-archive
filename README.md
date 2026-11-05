@@ -125,6 +125,8 @@ Polygon 연동을 위한 기본 구조는 문제별 `statement-sections/korean/`
 
 ## 에디토리얼 작성
 
+2026 비기너·어드밴스드의 풀이 템플릿과 빌드 방법은 [2026 에디토리얼 작성 안내](docs/editorials.md)를 참고하세요.
+
 `2025/solutions/main.tex`에 대회 정보와 해설 목록을 설정하고, 문제별 폴더의 `.tex`에 Beamer 슬라이드를 작성합니다. 이미지는 해당 문제 폴더의 `images/`에서 참조합니다. 공통 테마는 toolkit의 `src/kgupc_toolkit/resources/latex/layouts/beamer.tex`입니다. `latexmk`가 필요한 횟수만큼 컴파일하므로 목차, 링크, 참조도 갱신됩니다.
 
 에디토리얼의 문제 목록에서 번호나 제목을 클릭하면 해당 해설의 첫 슬라이드로 이동합니다. 새 해설을 추가할 때는 첫 프레임에 `\begin{frame}[label=problem-H]`처럼 라벨을 넣고, 목록에는 `\problemlink{H}{문제 제목}`을 사용합니다. 프레임 라벨과 링크는 [Beamer 공식 사용 설명서](https://tug.org/docs/latex/beamer/beameruserguide.pdf)의 하이퍼링크 기능을 사용합니다.

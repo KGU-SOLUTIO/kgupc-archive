@@ -1,0 +1,161 @@
+% !TeX root = ../main.tex
+
+\setproblem{D}{\ProblemTitleD}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-D]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{ehdnjs14}\\
+        태그: \tagtext{\#math, \#geometry, \#ad\_hoc, \#constructive}\\
+        예상 난이도: \tiertext{Gold1}
+    }
+    \begin{itemize}
+        \item 제출 9번, 정답 0명 (정답률 0\%)
+        \item 처음 푼 사람: -
+    \end{itemize}
+\end{frame}
+
+\subimport{images/}{lattice-figures.tex}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{픽의 정리}
+    \begin{itemize}
+        \item 한 방향의 격자점 수를 $M$이라 합시다. 본 문제에서는 $M=10^6$입니다.
+        \item 내부 격자점 수를 $I$라 합시다. 경계에는 꼭짓점 $N$개만 있으므로, 픽의 정리에 의해
+        \[
+            S=I+\frac{N}{2}-1
+        \]
+        \item 따라서 $N$이 고정되면 내부 격자점 수 $I$를 최대화하면 됩니다.
+        \item 바깥 테두리의 점은 내부에 들어갈 수 없으므로 $I\le(M-2)^2$입니다.
+        \item 이후 그림은 $M=10$이며, 주황색은 테두리 안쪽에서 꼭짓점으로 사용한 점입니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{$N=3$}
+    \begin{columns}[c,onlytextwidth]
+        \begin{column}{0.39\textwidth}
+            \centering
+            \GridJoinDiagram{0.4}
+                {(0,0) (9,1) (2,9)}
+                {0/0,9/1,2/9}
+                {$N=3$\\$S=39.5$}
+        \end{column}
+        \begin{column}{0.59\textwidth}
+            \begin{itemize}
+                \item $s=M-1$로 두고 다음 세 점을 잇습니다.
+                \[
+                    (0,0),\quad(s,1),\quad(2,s)
+                \]
+                \item $M$이 짝수이므로 세 변 모두 다른 격자점을 지나지 않습니다.
+                \item 신발끈 공식으로 넓이를 구하면 $S=(s^2-2)/2$입니다.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{$N=3$: 이보다 커질 수 없는 이유}
+    \begin{itemize}
+        \item 바운딩 박스가 전체가 아니면 $S\le s(s-1)/2<(s^2-2)/2$입니다.
+        \item 전체라면 적어도 한 꼭짓점이 모서리입니다. 모서리 두 개를 잇는 변은 허용되지 않으므로,
+              모서리의 꼭짓점은 정확히 하나입니다.
+        \item 대칭성을 이용해 세 점을 $(0,0),(s,y),(x,s)$로 쓰면 $x,y\ge1$이고
+        \[
+            2S=s^2-xy
+        \]
+        \item $xy=1$이면 나머지 변의 좌표 차가 $(s-1,-(s-1))$이 되어 조건에 어긋납니다.
+              따라서 $xy\ge2$이며, 앞의 구성이 상한 $(s^2-2)/2$를 달성합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \begin{itemize}
+        \item $4\le N\le8$에서는 내부 격자점 $(M-2)^2$개를 모두 포함할 수 있습니다.
+        \item 왼쪽 사각형에 테두리 꼭짓점을 하나씩 추가하면 오른쪽 팔각형이 됩니다.
+    \end{itemize}
+    \begin{center}
+        \GridJoinDiagram{0.31}
+            {(1,0) (9,1) (8,9) (0,8)}
+            {1/0,9/1,8/9,0/8}
+            {$N=4,\ I=64$\\$S=65$}
+        \hspace{1.4cm}
+        \GridJoinDiagram{0.31}
+            {(1,0) (2,0) (9,1) (9,2) (8,9) (7,9) (0,8) (0,7)}
+            {1/0,2/0,9/1,9/2,8/9,7/9,0/8,0/7}
+            {$N=8,\ I=64$\\$S=67$}
+    \end{center}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \begin{itemize}
+        \item $N\ge9$에서는 안쪽 점을 꼭짓점으로 사용해야 하므로 $I$가 줄어듭니다.
+        \item 내부 점 하나를 꼭짓점으로 바꾸면, 꼭짓점을 최대 $3$개까지 늘릴 수 있습니다.
+    \end{itemize}
+    \begin{center}
+        \GridJoinDiagram{0.265}
+            {(1,0) (2,0) (3,1) (3,0) (4,0) (9,1) (9,2) (8,9) (0,8)}
+            {1/0,2/0,3/1,3/0,4/0,9/1,9/2,8/9,0/8}
+            {$N=9,\ I=63$\\$S=66.5$}
+        \hspace{0.17cm}
+        \GridJoinDiagram{0.265}
+            {(1,0) (2,0) (3,1) (3,0) (4,0) (9,1) (9,2) (8,9) (7,9) (0,8)}
+            {1/0,2/0,3/1,3/0,4/0,9/1,9/2,8/9,7/9,0/8}
+            {$N=10,\ I=63$\\$S=67$}
+        \hspace{0.17cm}
+        \GridJoinDiagram{0.265}
+            {(1,0) (2,0) (3,1) (3,0) (4,0) (9,1) (9,2) (8,9) (7,9) (0,8) (0,7)}
+            {1/0,2/0,3/1,3/0,4/0,9/1,9/2,8/9,7/9,0/8,0/7}
+            {$N=11,\ I=63$\\$S=67.5$}
+        \hspace{0.17cm}
+        \GridJoinDiagram{0.265}
+            {(1,0) (2,0) (3,1) (3,0) (4,0) (5,1) (5,0) (6,0) (9,1) (9,2) (8,9) (0,8)}
+            {1/0,2/0,3/1,3/0,4/0,5/1,5/0,6/0,9/1,9/2,8/9,0/8}
+            {$N=12,\ I=62$\\$S=67$}
+    \end{center}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{내부 격자점이 최소 몇 개 줄어들까?}
+    \begin{itemize}
+        \item 테두리 위 꼭짓점을 $b$개, 안쪽 꼭짓점을 $j$개라 두면 $N=b+j$입니다.
+        \item 테두리 순서대로 보면, 한 변에서 연속한 테두리 꼭짓점은 최대 $2$개입니다.
+        \item 안쪽 경로 하나마다 이 묶음이 하나 늘어납니다. 경로는 최대 $j$개이므로 $b\le2(4+j)$입니다.
+        \item 내부에서 빠지는 점의 수 $T=(M-2)^2-I$는 $j$ 이상이므로
+        \[
+            \begin{aligned}
+                N=b+j&\le8+3j\le8+3T\\[3pt]
+                \therefore\quad T&\ge\left\lceil\frac{N-8}{3}\right\rceil
+            \end{aligned}
+        \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{톱니 모양으로 상한 달성하기}
+    \begin{itemize}
+        \item 팔각형의 아래쪽 테두리에 그림과 같은 톱니를 추가합니다.
+        \item 톱니 하나는 안쪽 점 $1$개를 꼭짓점으로 쓰고, 테두리 꼭짓점 $2$개를 추가합니다.
+        \item $k$개를 추가하면 꼭짓점은 $8+3k$개, 내부 격자점은 $(M-2)^2-k$개입니다.
+        \item $k=\lceil(N-8)/3\rceil$로 두고, 위쪽과 왼쪽의 테두리 꼭짓점을 최대 $2$개 빼면 됩니다.
+        \item 이때 내부 격자점은 더 줄지 않습니다. 그림의 $N=9,10,11$이 이 세 경우입니다.
+        \item $N\le M$에서 톱니들이 차지하는 가로 폭 $2k+2$는 $M-2$ 이하입니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{정답 정리}
+    \[
+        \boxed{
+        S_{\max}=
+        \begin{cases}
+            \dfrac{(M-1)^2-2}{2}, & N=3,\\[6pt]
+            (M-2)^2+\dfrac{N}{2}-1, & 4\le N\le8,\\[6pt]
+            (M-2)^2+\dfrac{N}{2}-1-\left\lceil\dfrac{N-8}{3}\right\rceil, & N\ge9.
+        \end{cases}}
+    \]
+    \begin{itemize}
+        \item 본 문제에서는 $M=10^6$을 대입해 $O(1)$에 계산할 수 있습니다.
+    \end{itemize}
+\end{frame}

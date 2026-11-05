@@ -1,0 +1,48 @@
+% !TeX root = ../main.tex
+
+\setproblem{D}{\ProblemTitleD}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-D]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{mingmingmon}\\
+        태그: \tagtext{\#implementation, \#string}\\
+        예상 난이도: \tiertext{Bronze2}
+    }
+    \begin{itemize}
+        \item 제출 15번, 정답 8명 (정답률 53.3\%)
+        \item 처음 푼 사람: ㅇㅎㅈ (00:09:47)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{카테고리별로 합치기}
+\begin{itemize}
+        \item 필요한 것은 날짜별 지출이 아니라 카테고리별 총지출입니다.
+        \item 카테고리 이름을 키로 쓰는 \texttt{map}에 총액을 저장해 봅시다.
+        \item 지출 내역을 읽을 때마다 해당 카테고리에 금액을 더합니다.
+        \[
+            \texttt{total[category]}\mathrel{+}=\texttt{amount}
+        \]
+        \item 예를 들어 \texttt{Food}에 $5\,000$원과 $3\,000$원을 썼다면 \texttt{total["Food"]}는 $8\,000$입니다.
+        \item 날짜 순서와 같은 날짜의 중복 여부는 이 합산에 영향을 주지 않습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{가장 많이 쓴 곳과 적게 쓴 곳 찾기}
+\begin{itemize}
+        \item 입력을 다 읽었다면 다섯 카테고리를 보며 총액이 가장 큰 것과 작은 것을 찾습니다.
+        \item 최댓값과 최솟값은 각각 유일하므로 동점 처리는 필요 없습니다.
+        \item 월은 문자열로 보관하면 \texttt{01} 같은 앞자리 \texttt{0}을 그대로 출력할 수 있습니다.
+        \item 아래 형식에 월, 카테고리, 총액을 넣어 두 줄로 출력합니다.
+    \end{itemize}
+    \begin{center}
+        \texttt{MM Highest Spending: CATEGORY TOTAL\_AMOUNT}\\[5pt]
+        \texttt{MM Lowest Spending: CATEGORY TOTAL\_AMOUNT}
+    \end{center}
+    \begin{itemize}
+        \item 카테고리는 $5$개로 고정되어 있으므로 시간 복잡도는 $O(N)$입니다.
+    \end{itemize}
+\end{frame}

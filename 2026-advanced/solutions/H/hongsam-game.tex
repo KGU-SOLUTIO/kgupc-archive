@@ -1,0 +1,61 @@
+% !TeX root = ../main.tex
+
+\setproblem{H}{\ProblemTitleH}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-H]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{yhjang04}\\
+        태그: \tagtext{\#scc, \#topological\_sorting, \#combinatorics}\\
+        예상 난이도: \tiertext{Platinum4}
+    }
+    \begin{itemize}
+        \item 제출 6번, 정답 1명 (정답률 16.7\%)
+        \item 처음 푼 사람: ㄴㄱㅁ (02:01:24)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{SCC로 압축하기}
+    \begin{itemize}
+        \item 지목 관계를 방향 그래프로 보고, 처음 지목한 두 사람을 시작점으로 둡니다.
+        \item 지목받을 수 있는 사람은 두 시작점에서 도달 가능한 정점입니다.
+        \item 같은 SCC 안에서는 서로 도달할 수 있으므로, SCC로 압축하면 DAG가 됩니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{진입 차수가 $0$인 SCC}
+    \begin{itemize}
+        \item 진입 차수가 $0$인 SCC는 외부에서 들어오는 간선이 없습니다.
+        \item 따라서 이러한 SCC마다 적어도 한 명을 처음에 직접 지목해야 합니다.
+        \item 반대로 DAG의 모든 정점은 진입 차수가 $0$인 어떤 정점에서 도달할 수 있습니다.
+        \item 그러므로 이러한 SCC마다 한 명씩 고르면 모든 친구가 지목받을 수 있습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{처음 지목할 두 사람의 조합 세기}
+    \begin{itemize}
+        \item 진입 차수가 $0$인 SCC의 개수를 $k$라 합시다.
+        \item $k\ge3$: 두 명으로는 부족하므로 답은 $0$입니다.
+        \item $k=2$: 두 SCC에서 한 명씩 골라야 하므로, 크기가 $s_1,s_2$이면 답은 $s_1s_2$입니다.
+        \item $k=1$: SCC의 크기를 $s$라 하면, 두 명 모두 그 밖에서 고른 경우를 제외합니다.
+        \[
+            \boxed{\binom{N}{2}-\binom{N-s}{2}}
+        \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{전체 알고리즘}
+    \begin{enumerate}
+        \item 타잔 또는 코사라주 알고리즘으로 SCC와 각 SCC의 크기를 구합니다.
+        \item 서로 다른 SCC 사이의 간선을 확인해 각 SCC의 진입 차수를 구합니다.
+        \item 진입 차수가 $0$인 SCC의 개수와 크기에 따라 앞의 공식을 적용합니다.
+    \end{enumerate}
+    \begin{itemize}
+        \item 전체 시간 복잡도는 $O(N+M)$입니다.
+    \end{itemize}
+\end{frame}

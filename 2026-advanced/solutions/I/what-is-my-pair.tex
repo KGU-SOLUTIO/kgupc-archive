@@ -1,0 +1,26 @@
+% !TeX root = ../main.tex
+
+\setproblem{I}{\ProblemTitleI}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-I]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13}\\
+        태그: \tagtext{\#dp, \#combinatorics}\\
+        예상 난이도: \tiertext{Silver3}
+    }
+    \begin{itemize}
+        \item 제출 12번, 정답 7명 (정답률 58.3\%)
+        \item 처음 푼 사람: ㅈㄱㅇ (00:24:39)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+\begin{itemize}
+    \item 같은 종류의 진공관이 $k$개 연속해 있다고 해 봅시다.
+    \item 마지막 진공관을 따로 포장하면 앞의 $k-1$개를, 짝지으면 앞의 $k-2$개를 포장하면 됩니다.
+    \item 즉, 피보나치 점화식 $fib[k]=fib[k-1]+fib[k-2]$입니다.
+    \item $90$까지 미리 계산해 두고, 연속한 진공관 묶음마다 해당하는 값을 곱하면 됩니다.
+\end{itemize}
+\end{frame}

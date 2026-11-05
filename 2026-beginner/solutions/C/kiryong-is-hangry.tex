@@ -1,0 +1,42 @@
+% !TeX root = ../main.tex
+
+\setproblem{C}{\ProblemTitleC}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-C]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{mingmingmon}\\
+        태그: \tagtext{\#implementation, \#simulation}\\
+        예상 난이도: \tiertext{Bronze3}
+    }
+    \begin{itemize}
+        \item 제출 21번, 정답 12명 (정답률 57.1\%)
+        \item 처음 푼 사람: ㅇㅇㅂ (00:06:38)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{시각을 분으로 바꾸기}
+\begin{itemize}
+        \item 시각을 시와 분으로 따로 계산하면 분이 $60$을 넘을 때마다 처리해야 합니다.
+        \item 처음부터 분 단위로 바꾸면 덧셈과 비교만으로 해결할 수 있습니다.
+        \[
+            \text{현재 시각}=60\times\text{시}+\text{분},\qquad 12\text{시}=720
+        \]
+        \item 예를 들어 \texttt{09:30}은 $570$, \texttt{11:50}은 $710$입니다.
+        \item 다음 일을 마치는 시각이 $720$ 이하라면 그 일을 하고, 그렇지 않으면 바로 일을 그만둡니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{다음 일을 할 수 있는지 확인하기}
+\begin{itemize}
+        \item 일을 순서대로 보며 $\text{현재 시각}+t_i\le720$이면 현재 시각에 $t_i$를 더합니다.
+        \item 정확히 $12$시에 끝나는 일도 할 수 있으므로 비교는 $<$가 아닌 $\le$입니다.
+        \item 다음 일을 끝낼 수 없다면 현재 시각이 정답입니다. $12$시까지 기다리는 것이 아닙니다.
+        \item \texttt{11:50}에 $15$분짜리 일이 남았다면 \texttt{11:50}에 그만두고, $10$분짜리라면 \texttt{12:00}까지 일합니다.
+        \item 마지막 시각을 $60$으로 나눈 몫과 나머지가 시와 분입니다. \texttt{\%02d:\%02d}처럼 두 자리로 출력합니다.
+        \item 각 일을 한 번씩 확인하므로 시간 복잡도는 $O(N)$입니다.
+    \end{itemize}
+\end{frame}

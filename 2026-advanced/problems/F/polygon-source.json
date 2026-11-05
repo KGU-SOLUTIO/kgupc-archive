@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "problemId": 541619,
+  "owner": "JangYeonghu",
+  "name": "loop-the-room",
+  "revision": 11,
+  "workingCopyRevision": 11,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1,
+    60
+  ],
+  "fetchedAt": "2026-10-29T10:18:38.754376+00:00"
+}

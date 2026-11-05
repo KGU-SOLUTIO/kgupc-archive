@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "problemId": 614672,
+  "owner": "areian13",
+  "name": "check-check-your-point",
+  "revision": 5,
+  "workingCopyRevision": 5,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1,
+    2,
+    3
+  ],
+  "fetchedAt": "2026-10-29T10:23:28.604484+00:00"
+}

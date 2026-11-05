@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "problemId": 499251,
+  "owner": "areian13",
+  "name": "from-npown-to-1",
+  "revision": 10,
+  "workingCopyRevision": 10,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1,
+    2
+  ],
+  "fetchedAt": "2026-10-29T10:14:23.292350+00:00"
+}

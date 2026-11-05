@@ -1,0 +1,52 @@
+% !TeX root = ../main.tex
+
+\setproblem{H}{\ProblemTitleH}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-H]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{mingmingmon}\\
+        태그: \tagtext{\#math, \#simulation}\\
+        예상 난이도: \tiertext{Bronze1}
+    }
+    \begin{itemize}
+        \item 제출 18번, 정답 8명 (정답률 44.4\%)
+        \item 처음 푼 사람: ㅇㅎㅈ (00:21:48)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{에피소드의 길이를 모두 더하기}
+\begin{itemize}
+        \item 에피소드 중간에 멈췄다가 이어 볼 수 있고, 에피소드 사이의 대기 시간도 없습니다.
+        \item 따라서 에피소드별로 따로 처리하지 않고 전체 재생 시간만 더하면 됩니다.
+        \item \texttt{MM:SS}를 $60\times\texttt{MM}+\texttt{SS}$초로 바꾸어 합을 $T$라 합시다.
+        \item 하루에 볼 수 있는 시간도 초로 맞춥니다. 평일은 $2\,700$초, 주말은 $5\,400$초입니다.
+        \item 전체 재생 시간은 $32$비트 정수 범위를 넘을 수 있으므로 \mbox{C++}에서는 \texttt{long long}을 사용합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{하루씩 처리하는 방법}
+\begin{itemize}
+        \item 먼저 하루씩 시청한다고 생각해 봅시다. 시작 요일은 입력으로 주어진 요일입니다.
+        \item 그날 시청을 시작하면 날짜 수를 $1$ 늘리고, 그 요일의 시청 가능 시간을 $T$에서 뺍니다.
+        \item $T\le0$이 되었다면 그날 시청을 끝냈으므로 종료합니다.
+        \item 아직 남아 있다면 다음 요일로 넘어갑니다. 일요일 다음은 월요일입니다.
+        \item $1$초짜리 영상도 시청한 날을 포함해 $1$일이 걸립니다.
+        \item 이 과정을 그대로 오래 반복하는 대신, 일주일 단위로 건너뛸 수 있습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{일주일씩 건너뛰기}
+\begin{itemize}
+        \item 어느 요일에 시작해도 연속한 $7$일에는 평일 $5$일과 주말 $2$일이 들어갑니다.
+        \item 일주일 동안 볼 수 있는 시간은 $W=5\times2\,700+2\times5\,400=24\,300$초입니다.
+        \item $q=\lfloor T/W\rfloor$주를 건너뛰어 날짜 수를 $7q$로 두고, $T$를 $T\bmod W$로 바꿉니다.
+        \item $7$일 단위로 건너뛰었으므로 요일은 시작 요일 그대로입니다.
+        \item $T=0$이면 이미 끝났고, 남아 있다면 앞의 방법으로 최대 $7$일만 더 확인하면 됩니다.
+        \item 입력 시간을 더하는 데 $O(N)$, 합을 구한 뒤에는 $O(1)$이 걸립니다.
+    \end{itemize}
+\end{frame}

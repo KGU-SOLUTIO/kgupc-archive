@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "problemId": 605690,
+  "owner": "mingmingmon",
+  "name": "kiryong-budget-book",
+  "revision": 6,
+  "workingCopyRevision": 6,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1,
+    2
+  ],
+  "fetchedAt": "2026-10-29T10:52:47.208695+00:00"
+}

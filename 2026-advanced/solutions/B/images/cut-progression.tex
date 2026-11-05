@@ -1,0 +1,50 @@
+% 이전 칼질은 회색, 이번 칼질과 새 교점은 보라색으로 표시한다.
+\begin{tikzpicture}[
+    x=1.05cm, y=1.05cm,
+    line cap=round, line join=round,
+    old cut/.style={draw=black!40, line width=0.8pt},
+    new cut/.style={draw=solutio-purple, line width=1.25pt},
+    every node/.style={font=\small}
+]
+    % 직선은 단위 법선 (-sin(angle), cos(angle))과 원점으로부터의 부호 있는 거리로 정의한다.
+    \foreach \step in {1,...,4} {
+        \begin{scope}[xshift={2.95*\step cm}]
+            \begin{scope}
+                \clip (0,0) circle[radius=1.12];
+                \foreach \cut in {1,...,\step} {
+                    \pgfmathsetmacro{\angle}{{12,42,78,118}[\cut-1]}
+                    \pgfmathsetmacro{\offset}{{-0.39,-0.205,-0.235,-0.48}[\cut-1]}
+                    \ifnum\cut=\step
+                        \tikzset{current cut/.style={new cut}}
+                    \else
+                        \tikzset{current cut/.style={old cut}}
+                    \fi
+                    \draw[current cut]
+                        ({-2*cos(\angle)-\offset*sin(\angle)},
+                         {-2*sin(\angle)+\offset*cos(\angle)}) --
+                        ({2*cos(\angle)-\offset*sin(\angle)},
+                         {2*sin(\angle)+\offset*cos(\angle)});
+                }
+            \end{scope}
+            \draw[black!85, line width=1pt] (0,0) circle[radius=1];
+
+            % 새 칼질 위에 생기는 서로 다른 (step-1)개의 교점.
+            \ifnum\step>1
+                \pgfmathtruncatemacro{\previous}{\step-1}
+                \pgfmathsetmacro{\newAngle}{{12,42,78,118}[\step-1]}
+                \pgfmathsetmacro{\newOffset}{{-0.39,-0.205,-0.235,-0.48}[\step-1]}
+                \foreach \cut in {1,...,\previous} {
+                    \pgfmathsetmacro{\oldAngle}{{12,42,78,118}[\cut-1]}
+                    \pgfmathsetmacro{\oldOffset}{{-0.39,-0.205,-0.235,-0.48}[\cut-1]}
+                    \pgfmathsetmacro{\det}{sin(\oldAngle-\newAngle)}
+                    \pgfmathsetmacro{\ix}{(\newOffset*cos(\oldAngle)-\oldOffset*cos(\newAngle))/\det}
+                    \pgfmathsetmacro{\iy}{(\newOffset*sin(\oldAngle)-\oldOffset*sin(\newAngle))/\det}
+                    \fill[solutio-purple] (\ix,\iy) circle[radius=0.035];
+                }
+            \fi
+
+            \node at (0,-1.43) {$\step$번째 칼질};
+            \node[text=solutio-purple] at (0,-1.82) {$+\step$조각};
+        \end{scope}
+    }
+\end{tikzpicture}

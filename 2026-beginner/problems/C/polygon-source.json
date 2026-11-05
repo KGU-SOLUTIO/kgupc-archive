@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "problemId": 603932,
+  "owner": "mingmingmon",
+  "name": "kiryong-is-hangry",
+  "revision": 4,
+  "workingCopyRevision": 4,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1,
+    2,
+    3
+  ],
+  "fetchedAt": "2026-10-29T10:52:18.160797+00:00"
+}

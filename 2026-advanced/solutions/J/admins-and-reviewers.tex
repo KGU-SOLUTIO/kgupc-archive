@@ -1,0 +1,80 @@
+% !TeX root = ../main.tex
+
+\setproblem{J}{\ProblemTitleJ}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-J]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{yhjang04}\\
+        태그: \tagtext{\#greedy, \#prefix\_sum, \#binary\_search}\\
+        예상 난이도: \tiertext{Gold2}
+    }
+    \begin{itemize}
+        \item 제출 19번, 정답 4명 (정답률 21.1\%)
+        \item 처음 푼 사람: ㄴㄱㅁ (01:19:01)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{고를 대상 정렬하기}
+    \begin{itemize}
+        \item 문제의 티어 $a$는 내림차순, 검수진의 티어 $b$는 오름차순으로 정렬합니다.
+        \item 고른 개수가 같다면 문제는 어려울수록, 검수진은 약할수록 고통이 줄지 않습니다.
+        \item 따라서 앞에서부터 고르는 것이 최적이며, 문제 수 $x$와 검수진 수 $y$만 정하면 됩니다.
+        \item $x$를 $1$부터 $N$까지 순회하며 각 $x$에 대한 최적의 $y$를 구합니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{고정된 $x$에서 최적의 $y$ 찾기}
+    \begin{itemize}
+        \item $j$번째 검수진을 추가할 때 얻는 고통을 $h(x,j)$라 두면
+        \[
+            h(x,j)=\sum_{i=1}^{x}\max(a_i-b_j,0)
+        \]
+        \item $h(x,j)$는 $j$가 커질수록 증가하지 않습니다.
+        \item 검수진 한 명을 추가하면 만족도는 $h(x,j)-C$만큼 변합니다.
+        \item 따라서 $h(x,j)>C$인 마지막 $j$를 $y$로 고르면 최적입니다.
+        \item 이분 탐색으로 구하며, 해당하는 $j$가 없으면 $y=0$으로 둡니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{접두합으로 $h(x,j)$ 계산하기}
+    \begin{itemize}
+        \item 정렬된 $a,b$의 접두합을 각각 $PA,PB$라 합시다.
+        \item $p_j$를 $b_j$보다 티어가 높은 문제 수로 두고 미리 구합니다.
+        \item 고통을 주는 문제 수가 $k=\min(x,p_j)$이므로, $h(x,j)=PA[k]-k\cdot b_j$입니다.
+        \item 이 식으로 이분 탐색 중 $h(x,j)$를 $O(1)$에 계산할 수 있습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{검수진의 고통 총합 (1)}
+    \begin{itemize}
+        \item $q$를 $b_j<a_x$인 검수진의 수로 두고 두 구간으로 나눕니다.
+        \item $j\le q$인 검수진은 선택한 모든 문제에서 고통을 받습니다.
+        \item 선택한 검수진 중 이 구간에 속하는 사람은 $r=\min(y,q)$명입니다.
+        \item 이들의 고통 총합은 $PA[x]\cdot r-x\cdot PB[r]$입니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{검수진의 고통 총합 (2)}
+    \begin{itemize}
+        \item $j>q$이면 $b_j\ge a_x$이므로 $p_j\le x$입니다. 이때 검수진의 고통은 $PA[p_j]-p_j\cdot b_j$입니다.
+        \item 이 값은 $x$와 무관하므로 접두합 $PC$를 미리 구해 둡니다.
+        \item $y>q$이면 이 구간의 고통 총합은 $PC[y]-PC[q]$입니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{정답 계산과 시간 복잡도}
+    \begin{itemize}
+        \item 두 구간의 고통 총합에서 운영진의 비용 $C(x+y)$를 빼 만족도를 구합니다.
+        \item 모든 $x$에 대해 구한 만족도 중 최댓값이 정답입니다.
+        \item 아무것도 고르지 않는 경우가 있으므로 답의 초깃값은 $0$입니다.
+        \item 전체 시간 복잡도는 $O((N+M)\log(N+M))$입니다.
+    \end{itemize}
+\end{frame}

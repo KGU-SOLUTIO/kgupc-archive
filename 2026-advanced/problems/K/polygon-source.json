@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "problemId": 605691,
+  "owner": "mingmingmon",
+  "name": "kiryong-mealprep",
+  "revision": 7,
+  "workingCopyRevision": 7,
+  "modified": false,
+  "language": "korean",
+  "testset": "tests",
+  "sampleTestIndices": [
+    1
+  ],
+  "fetchedAt": "2026-10-29T10:22:49.558824+00:00"
+}

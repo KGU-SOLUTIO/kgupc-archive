@@ -1,0 +1,35 @@
+% !TeX root = ../main.tex
+
+\setproblem{B}{\ProblemTitleB}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-B]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{areian13}\\
+        태그: \tagtext{\#implementation, \#string}\\
+        예상 난이도: \tiertext{Bronze3}
+    }
+    \begin{itemize}
+        \item 제출 18번, 정답 11명 (정답률 61.1\%)
+        \item 처음 푼 사람: ㅇㅎㅈ (00:02:53)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+\begin{itemize}
+        \item 이름 전체를 한꺼번에 바꿀 필요 없이, 문자를 하나씩 보고 변환하면 됩니다.
+        \item 숫자에 대응하는 알파벳을 순서대로 적으면 \texttt{OIZEASGTBQ}입니다.
+    \end{itemize}
+    \begin{center}
+        \begin{tabular}{c|cccccccccc}
+            숫자 & \texttt{0} & \texttt{1} & \texttt{2} & \texttt{3} & \texttt{4} & \texttt{5} & \texttt{6} & \texttt{7} & \texttt{8} & \texttt{9}\\
+            문자 & \texttt{O} & \texttt{I} & \texttt{Z} & \texttt{E} & \texttt{A} & \texttt{S} & \texttt{G} & \texttt{T} & \texttt{B} & \texttt{Q}
+        \end{tabular}
+    \end{center}
+    \begin{itemize}
+        \item 숫자는 같은 열의 알파벳으로, 표에 있는 알파벳은 같은 열의 숫자로 바꿉니다.
+        \item 표에 없는 알파벳은 그대로 출력합니다.
+        \item 모든 이름을 같은 방법으로 처리합니다. 전체 문자 수를 $L$이라 하면 시간 복잡도는 $O(L)$입니다.
+    \end{itemize}
+\end{frame}

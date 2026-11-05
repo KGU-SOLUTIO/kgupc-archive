@@ -1,0 +1,53 @@
+% !TeX root = ../main.tex
+
+\setproblem{I}{\ProblemTitleI}
+\section{\texorpdfstring{\pletter. \ptitle}{문제 \pletter}}
+
+\begin{frame}[label=problem-I]
+    \sectiontitle{\pletter}{\ptitle}
+    \sectionmeta{
+        출제자: \idtext{mingmingmon}\\
+        태그: \tagtext{\#implementation, \#simulation}\\
+        예상 난이도: \tiertext{Bronze1}
+    }
+    \begin{itemize}
+        \item 제출 16번, 정답 8명 (정답률 50\%)
+        \item 처음 푼 사람: ㅂㄱㅇ (00:37:08)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{일주일을 분 단위 배열로 만들기}
+\begin{itemize}
+        \item 일주일은 $7\times24\times60=10\,080$분뿐입니다. 각 분에 무엇을 하는지 배열에 적어 둡시다.
+        \item 월요일부터 일요일에 차례대로 $0$부터 $6$까지 번호를 붙입니다.
+        \item 요일 번호가 $d$이고 시각이 \texttt{HH:MM}이면 배열의 위치는 다음과 같습니다.
+        \[
+            1\,440d+60\times\texttt{HH}+\texttt{MM}
+        \]
+        \item 월요일 \texttt{00:00}은 $0$, 일요일 \texttt{23:59}는 $10\,079$가 됩니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{계획을 배열에 적어 두기}
+\begin{itemize}
+        \item 처음에는 모든 칸을 빈 문자열로 둡니다. 비어 있다면 그 시각에는 계획이 없다는 뜻입니다.
+        \item 각 계획의 시작 시각과 종료 시각을 앞의 방식으로 바꾸어 $l,r$이라 합시다.
+        \item $l$부터 $r$까지 모든 칸에 그 계획의 공부 내용을 적습니다.
+        \item 시작과 종료 시각을 모두 포함하므로, 반복문은 $l\le i\le r$인 동안 실행합니다.
+        \item 계획은 서로 겹치지 않으므로, 이미 채운 칸을 덮어쓰는 일은 없습니다.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{\pletter}. \ptitle}
+    \textbf{질의는 배열에서 바로 확인하기}
+\begin{itemize}
+        \item 질의의 요일과 시각도 같은 방식으로 배열의 위치로 바꿉니다.
+        \item 그 칸에 공부 내용이 있으면 출력하고, 비어 있다면 \texttt{Kiryong is free!!!}를 출력합니다.
+        \item 질의가 들어온 순서대로 답하면 됩니다. 질의를 시간순으로 정렬할 필요는 없습니다.
+        \item 계획을 하나씩 질의와 비교하는 대신, 미리 만든 배열을 한 번 읽기만 하면 됩니다.
+        \item 계획이 겹치지 않으므로 배열을 채우는 횟수는 전체를 합쳐도 $10\,080$번 이하입니다.
+        \item 시간 복잡도는 $O(N+Q+10\,080)$, 배열의 크기는 $10\,080$입니다.
+    \end{itemize}
+\end{frame}
