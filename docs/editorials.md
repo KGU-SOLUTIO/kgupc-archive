@@ -20,6 +20,18 @@
 
 각 문제의 `images/`에 그림을 넣고 `\includegraphics{images/파일명.png}`로 참조합니다. 표지는 기존 toolkit의 `\titlepage`를 그대로 사용합니다. `sponsors.png`는 2025 템플릿의 이미지를 복사한 것이므로 2026 후원사 이미지로 교체하면 됩니다.
 
+## 표지의 주최·후원 로고
+
+주최와 후원 이미지를 나눠 표시하려면 `solutions/main.tex`에서 다음처럼 지정합니다.
+
+```tex
+\author{출제진 이름}
+\organizerimage{../organizers.png}
+\sponsorimage{../sponsors.png}
+```
+
+toolkit이 `Organizers`·`Sponsors` 제목과 로고의 크기·간격을 처리합니다. 지정하지 않은 로고 영역은 표시하지 않으며, 하나만 지정해도 위쪽부터 배치합니다. 저자 정보는 표지 오른쪽 위에 `solutio-gray`로 표시됩니다. 기존 `\renewcommand{\sponsorimage}{파일명}` 방식도 유지됩니다.
+
 ## 출제진 후기
 
 단일 대회에서는 `solutions/afterword.tex`에 출제진 후기를 작성합니다. 문제 목록의 마지막 페이지 아래에 있는 `출제진 후기 보기`를 누르면 마지막 후기 페이지로 이동합니다. 후기 양식은 `2026-advanced/solutions/afterword.tex`에 있으며, 다음처럼 아이디와 본문을 넣습니다.
