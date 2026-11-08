@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - '**/main.pdf'
-      - 'scripts/prepare_pages.py'
       - '.github/workflows/publish-pdfs.yml'
   workflow_dispatch:
 
@@ -29,10 +28,24 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/configure-pages@v5
       - name: Prepare PDFs
-        run: python3 scripts/prepare_pages.py
+        shell: bash
+        run: |
+          mkdir -p _site
+          printf '<!doctype html><html lang="ko"><meta charset="utf-8"><title>KGUPC Archive</title><h1>KGUPC Archive</h1><ul>\n' > _site/index.html
+          for contest in [0-9]*/; do
+            for section in problems solutions; do
+              pdf="${contest}${section}/main.pdf"
+              if [ -f "$pdf" ]; then
+                mkdir -p "_site/${contest}${section}"
+                cp "$pdf" "_site/$pdf"
+                printf '<li><a href="%s">%s %s</a></li>\n' "$pdf" "${contest%/}" "$section" >> _site/index.html
+              fi
+            done
+          done
+          printf '</ul></html>\n' >> _site/index.html
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: build/pages
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
